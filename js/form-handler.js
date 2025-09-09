@@ -231,7 +231,8 @@ async function searchGuest() {
     //     }
     // });
     // La URL de tu backend proxy (cuando lo corras localmente)
-    const BACKEND_URL = "http://localhost:3000";
+    // const BACKEND_URL = "http://localhost:3000";
+    const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app"
 
     const response = await fetch(
       `${BACKEND_URL}/api/search?name=${encodeURIComponent(searchName)}`
