@@ -192,9 +192,6 @@ function setupGuestSearch() {
   }
 }
 
-// Funciones y variables que no se modifican
-// ... (resto de tu código que está arriba) ...
-
 async function searchGuest() {
     const searchInput = document.getElementById("searchName");
     const searchResult = document.getElementById("searchResult");
@@ -227,7 +224,6 @@ async function searchGuest() {
     searchResult.className = "search-result searching";
 
     try {
-        // La URL de tu backend proxy en Vercel
         const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app";
 
         const response = await fetch(
@@ -235,25 +231,19 @@ async function searchGuest() {
         );
 
         if (!response.ok) {
-            // Manejar errores de respuesta no exitosa
-            if (response.status === 404) {
-                handleGuestNotFound(searchName);
-                return;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Error HTTP: ${response.status}`);
         }
 
-        const data = await response.json();
+        const result = await response.json();
 
-        if (data.success) {
-            if (data.data && data.data.length > 0) {
-                // Asume que tu backend ahora devuelve un arreglo de invitados en la propiedad `data`
-                handleGuestFound(data.data[0]); 
-            } else {
-                handleGuestNotFound(searchName);
-            }
+        // **Ajuste clave aquí:**
+        // Tu backend devuelve { success: true, data: [...] }
+        if (result.success && result.data && result.data.length > 0) {
+            // Si la búsqueda fue exitosa y hay resultados,
+            // pasamos el primer invitado encontrado a la función handleGuestFound
+            handleGuestFound(result.data[0]); 
         } else {
-            // Manejar errores de la API, como "invitado no encontrado"
+            // Si no se encontró ningún invitado o la API devolvió un error
             handleGuestNotFound(searchName);
         }
     } catch (error) {
