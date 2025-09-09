@@ -95,64 +95,64 @@ function updateMusicButton() {
 let currentGuestData = null;
 let maxCompanionsAllowed = 0;
 
-async function searchGuest() {
-    const searchName = document.getElementById('searchName').value.trim();
-    const searchResult = document.getElementById('searchResult');
-    const confirmationForm = document.getElementById('confirmationForm');
+// async function searchGuest() {
+//     const searchName = document.getElementById('searchName').value.trim();
+//     const searchResult = document.getElementById('searchResult');
+//     const confirmationForm = document.getElementById('confirmationForm');
     
-    if (!searchName) {
-        searchResult.innerHTML = '<p>Por favor ingresa un nombre para buscar.</p>';
-        searchResult.className = 'search-result not-found';
-        return;
-    }
+//     if (!searchName) {
+//         searchResult.innerHTML = '<p>Por favor ingresa un nombre para buscar.</p>';
+//         searchResult.className = 'search-result not-found';
+//         return;
+//     }
     
-    searchResult.innerHTML = '<p>Buscando...</p>';
-    searchResult.className = 'search-result';
+//     searchResult.innerHTML = '<p>Buscando...</p>';
+//     searchResult.className = 'search-result';
     
-    try {
-        const response = await fetch(`${SEARCH_SCRIPT_URL}?action=search&name=${encodeURIComponent(searchName)}`);
-        const data = await response.json();
+//     try {
+//         const response = await fetch(`${SEARCH_SCRIPT_URL}?action=search&name=${encodeURIComponent(searchName)}`);
+//         const data = await response.json();
         
-        if (data.found) {
-            currentGuestData = data.guest;
-            maxCompanionsAllowed = data.guest.maxCompanions || 0;
+//         if (data.found) {
+//             currentGuestData = data.guest;
+//             maxCompanionsAllowed = data.guest.maxCompanions || 0;
             
-            searchResult.innerHTML = `
-                <p><strong>¡Invitado encontrado!</strong></p>
-                <p><strong>Nombre:</strong> ${data.guest.name}</p>
-                <p><strong>Acompañantes permitidos:</strong> ${maxCompanionsAllowed}</p>
-            `;
-            searchResult.className = 'search-result found';
+//             searchResult.innerHTML = `
+//                 <p><strong>¡Invitado encontrado!</strong></p>
+//                 <p><strong>Nombre:</strong> ${data.guest.name}</p>
+//                 <p><strong>Acompañantes permitidos:</strong> ${maxCompanionsAllowed}</p>
+//             `;
+//             searchResult.className = 'search-result found';
             
-            // Llenar el formulario
-            document.getElementById('guestName').value = data.guest.name;
-            document.getElementById('email').value = data.guest.email || '';
-            document.getElementById('phone').value = data.guest.phone || '';
+//             // Llenar el formulario
+//             document.getElementById('guestName').value = data.guest.name;
+//             document.getElementById('email').value = data.guest.email || '';
+//             document.getElementById('phone').value = data.guest.phone || '';
             
-            // Mostrar formulario
-            confirmationForm.style.display = 'block';
+//             // Mostrar formulario
+//             confirmationForm.style.display = 'block';
             
-            // Actualizar información de acompañantes
-            updateCompanionsInfo();
+//             // Actualizar información de acompañantes
+//             updateCompanionsInfo();
             
-        } else {
-            searchResult.innerHTML = `
-                <p><strong>Invitado no encontrado</strong></p>
-                <p>Por favor verifica que hayas escrito tu nombre exactamente como aparece en la invitación, o contacta a los novios.</p>
-            `;
-            searchResult.className = 'search-result not-found';
-            confirmationForm.style.display = 'none';
-        }
+//         } else {
+//             searchResult.innerHTML = `
+//                 <p><strong>Invitado no encontrado</strong></p>
+//                 <p>Por favor verifica que hayas escrito tu nombre exactamente como aparece en la invitación, o contacta a los novios.</p>
+//             `;
+//             searchResult.className = 'search-result not-found';
+//             confirmationForm.style.display = 'none';
+//         }
         
-    } catch (error) {
-        console.error('Error en búsqueda:', error);
-        searchResult.innerHTML = `
-            <p><strong>Error de conexión</strong></p>
-            <p>No se pudo realizar la búsqueda. Por favor intenta nuevamente o contacta a los novios.</p>
-        `;
-        searchResult.className = 'search-result not-found';
-    }
-}
+//     } catch (error) {
+//         console.error('Error en búsqueda:', error);
+//         searchResult.innerHTML = `
+//             <p><strong>Error de conexión</strong></p>
+//             <p>No se pudo realizar la búsqueda. Por favor intenta nuevamente o contacta a los novios.</p>
+//         `;
+//         searchResult.className = 'search-result not-found';
+//     }
+// }
 
 // ===== COMPANIONS FUNCTIONALITY =====
 function updateCompanionsInfo() {
