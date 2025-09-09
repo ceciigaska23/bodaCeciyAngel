@@ -193,63 +193,65 @@ function setupGuestSearch() {
 }
 
 async function searchGuest() {
-    const searchInput = document.getElementById("searchName");
-    const searchResult = document.getElementById("searchResult");
-    const confirmationForm = document.getElementById("confirmationForm");
+  const searchInput = document.getElementById("searchName");
+  const searchResult = document.getElementById("searchResult");
+  const confirmationForm = document.getElementById("confirmationForm");
 
-    if (!searchInput || !searchResult) return;
+  if (!searchInput || !searchResult) return;
 
-    const searchName = searchInput.value.trim();
+  const searchName = searchInput.value.trim();
 
-    if (!searchName) {
-        searchResult.innerHTML = "<p>Por favor ingresa un nombre para buscar.</p>";
-        searchResult.className = "search-result not-found";
-        return;
-    }
+  if (!searchName) {
+    searchResult.innerHTML = "<p>Por favor ingresa un nombre para buscar.</p>";
+    searchResult.className = "search-result not-found";
+    return;
+  }
 
-    if (searchName.length < 2) {
-        searchResult.innerHTML =
-            "<p>Ingresa al menos 2 caracteres para buscar.</p>";
-        searchResult.className = "search-result not-found";
-        return;
-    }
+  if (searchName.length < 2) {
+    searchResult.innerHTML =
+      "<p>Ingresa al menos 2 caracteres para buscar.</p>";
+    searchResult.className = "search-result not-found";
+    return;
+  }
 
-    // Mostrar loading
-    searchResult.innerHTML = `
+  // Mostrar loading
+  searchResult.innerHTML = `
         <div class="loading-spinner">
             <div class="spinner"></div>
             <p>Buscando invitado...</p>
         </div>
     `;
-    searchResult.className = "search-result searching";
+  searchResult.className = "search-result searching";
 
-    try {
-        const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app";
+  try {
+    const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app";
 
-        const response = await fetch(
-            `${BACKEND_URL}/api/search?name=${encodeURIComponent(searchName)}`
-        );
+    const response = await fetch(
+      `${BACKEND_URL}/api/search?name=${encodeURIComponent(searchName)}`
+    );
 
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
-
-        const result = await response.json();
-
-        // **Ajuste clave aquí:**
-        // Tu backend devuelve { success: true, data: [...] }
-        if (result.success && result.data && result.data.length > 0) {
-            // Si la búsqueda fue exitosa y hay resultados,
-            // pasamos el primer invitado encontrado a la función handleGuestFound
-            handleGuestFound(result.data[0]); 
-        } else {
-            // Si no se encontró ningún invitado o la API devolvió un error
-            handleGuestNotFound(searchName);
-        }
-    } catch (error) {
-        console.error("Error en búsqueda:", error);
-        handleSearchError();
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
     }
+
+    const result = await response.json();
+
+    // **Ajuste clave aquí:**
+    // Tu backend devuelve { success: true, data: [...] }
+    // if (result.success && result.data && result.data.length > 0) {
+    // Si la búsqueda fue exitosa y hay resultados,
+    // pasamos el primer invitado encontrado a la función handleGuestFound
+    // handleGuestFound(result.data[0]);
+    if (result.found) {
+      handleGuestFound(result.guest);
+    } else {
+      // Si no se encontró ningún invitado o la API devolvió un error
+      handleGuestNotFound(searchName);
+    }
+  } catch (error) {
+    console.error("Error en búsqueda:", error);
+    handleSearchError();
+  }
 }
 
 function handleGuestFound(guestData) {
