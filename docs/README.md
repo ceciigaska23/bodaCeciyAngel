@@ -1,4 +1,4 @@
-# 💕 Invitación de Boda Digital - María & Carlos
+# 💕 Invitación de Boda Digital - Ceci & Ángel
 
 Una invitación de boda interactiva y moderna con funcionalidades avanzadas de confirmación de asistencia.
 
@@ -258,5 +258,6 @@ Para problemas técnicos:
 Este proyecto es de uso libre para invitaciones de boda personales. No está permitido el uso comercial sin autorización.
 
 ---
+
 
 💕 **¡Que tengan una boda increíble!** 💕
