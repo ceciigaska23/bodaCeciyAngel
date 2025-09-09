@@ -192,67 +192,74 @@ function setupGuestSearch() {
   }
 }
 
+// Funciones y variables que no se modifican
+// ... (resto de tu código que está arriba) ...
+
 async function searchGuest() {
-  const searchInput = document.getElementById("searchName");
-  const searchResult = document.getElementById("searchResult");
-  const confirmationForm = document.getElementById("confirmationForm");
+    const searchInput = document.getElementById("searchName");
+    const searchResult = document.getElementById("searchResult");
+    const confirmationForm = document.getElementById("confirmationForm");
 
-  if (!searchInput || !searchResult) return;
+    if (!searchInput || !searchResult) return;
 
-  const searchName = searchInput.value.trim();
+    const searchName = searchInput.value.trim();
 
-  if (!searchName) {
-    searchResult.innerHTML = "<p>Por favor ingresa un nombre para buscar.</p>";
-    searchResult.className = "search-result not-found";
-    return;
-  }
+    if (!searchName) {
+        searchResult.innerHTML = "<p>Por favor ingresa un nombre para buscar.</p>";
+        searchResult.className = "search-result not-found";
+        return;
+    }
 
-  if (searchName.length < 2) {
-    searchResult.innerHTML =
-      "<p>Ingresa al menos 2 caracteres para buscar.</p>";
-    searchResult.className = "search-result not-found";
-    return;
-  }
+    if (searchName.length < 2) {
+        searchResult.innerHTML =
+            "<p>Ingresa al menos 2 caracteres para buscar.</p>";
+        searchResult.className = "search-result not-found";
+        return;
+    }
 
-  // Mostrar loading
-  searchResult.innerHTML = `
+    // Mostrar loading
+    searchResult.innerHTML = `
         <div class="loading-spinner">
             <div class="spinner"></div>
             <p>Buscando invitado...</p>
         </div>
     `;
-  searchResult.className = "search-result searching";
+    searchResult.className = "search-result searching";
 
-  try {
-    // const response = await fetch(`${SEARCH_SCRIPT_URL}?action=search&name=${encodeURIComponent(searchName)}`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // });
-    // La URL de tu backend proxy (cuando lo corras localmente)
-    // const BACKEND_URL = "http://localhost:3000";
-    const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app"
+    try {
+        // La URL de tu backend proxy en Vercel
+        const BACKEND_URL = "https://boda-cecily-angel-backend.vercel.app";
 
-    const response = await fetch(
-      `${BACKEND_URL}/api/search?name=${encodeURIComponent(searchName)}`
-    );
+        const response = await fetch(
+            `${BACKEND_URL}/api/search?name=${encodeURIComponent(searchName)}`
+        );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            // Manejar errores de respuesta no exitosa
+            if (response.status === 404) {
+                handleGuestNotFound(searchName);
+                return;
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.success) {
+            if (data.data && data.data.length > 0) {
+                // Asume que tu backend ahora devuelve un arreglo de invitados en la propiedad `data`
+                handleGuestFound(data.data[0]); 
+            } else {
+                handleGuestNotFound(searchName);
+            }
+        } else {
+            // Manejar errores de la API, como "invitado no encontrado"
+            handleGuestNotFound(searchName);
+        }
+    } catch (error) {
+        console.error("Error en búsqueda:", error);
+        handleSearchError();
     }
-
-    const data = await response.json();
-
-    if (data.found) {
-      handleGuestFound(data.guest);
-    } else {
-      handleGuestNotFound(searchName);
-    }
-  } catch (error) {
-    console.error("Error en búsqueda:", error);
-    handleSearchError();
-  }
 }
 
 function handleGuestFound(guestData) {
