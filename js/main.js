@@ -5,14 +5,20 @@ let musicPlaying = false;
 const weddingMusic = document.getElementById('weddingMusic');
 const musicToggle = document.getElementById('musicToggle');
 const splashScreen = document.getElementById('splashScreen');
-    const mainContent = document.getElementById('mainContent');
+const mainContent = document.getElementById('mainContent');
+const themeToggleBtn = document.getElementById('themeToggle');
 
 // ===== SPLASH SCREEN FUNCTIONALITY =====
 function startInvitation() {
     // Reproducir música
     if (weddingMusic) {
-        weddingMusic.play().catch(error => {
+        weddingMusic.play().then(() => {
+            musicPlaying = true;
+            updateMusicButton();
+        }).catch(error => {
             console.log("No se pudo reproducir la música automáticamente:", error);
+            // Si la reproducción automática falla, al menos actualizamos el botón
+            updateMusicButton();
         });
     }
 
@@ -43,6 +49,31 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Invitación de boda cargada correctamente 💕');
 });
 
+// ===== THEME TOGGLE FUNCTIONALITY (NUEVO) =====
+function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme); // Guardar la preferencia
+    updateThemeToggleIcon(newTheme);
+}
+
+function updateThemeToggleIcon(theme) {
+    if (themeToggleBtn) {
+        themeToggleBtn.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+}
+
+// Cargar la preferencia del tema al cargar la página
+(function loadThemePreference() {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        document.body.setAttribute('data-theme', storedTheme);
+        updateThemeToggleIcon(storedTheme);
+    }
+})();
+
 // ===== MUSIC FUNCTIONALITY =====
 // function playMusic() {
 //     if (weddingMusic) {
@@ -59,21 +90,31 @@ document.addEventListener('DOMContentLoaded', function() {
 //     }
 // }
 
-// function pauseMusic() {
-//     if (weddingMusic) {
-//         weddingMusic.pause();
-//         musicPlaying = false;
-//         updateMusicButton();
-//     }
-// }
+function toggleMusic() {
+    if (weddingMusic.paused) {
+        weddingMusic.play();
+        musicPlaying = true;
+    } else {
+        weddingMusic.pause();
+        musicPlaying = false;
+    }
+    updateMusicButton();
+}
 
-// function toggleMusic() {
-//     if (musicPlaying) {
-//         pauseMusic();
-//     } else {
-//         playMusic();
-//     }
-// }
+function updateMusicButton() {
+    if (musicToggle) {
+        if (musicPlaying) {
+            musicToggle.innerHTML = '🎵';
+            musicToggle.classList.remove('paused');
+            musicToggle.title = 'Pausar música';
+        } else {
+            musicToggle.innerHTML = '🔇';
+            musicToggle.classList.add('paused');
+            musicToggle.title = 'Reproducir música';
+        }
+    }
+}
+
 
 function updateMusicButton() {
     if (musicToggle) {
@@ -360,3 +401,142 @@ document.addEventListener('touchend', function(e) {
     }
     lastTouchEnd = now;
 }, false);
+
+// Funciones para la sección de ubicación
+function openMaps() {
+    const address = "Av Centenario 1100, Colinas de Tarango, Álvaro Obregón, 01620 Ciudad de México, CDMX";
+    const encodedAddress = encodeURIComponent(address);
+    
+    // Detectar si es dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // En móvil, intentar abrir la app de Maps
+        const mapsUrl = `https://maps.google.com/maps?q=${encodedAddress}`;
+        window.open(mapsUrl, '_blank');
+    } else {
+        // En desktop, abrir Google Maps en nueva pestaña
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+        window.open(mapsUrl, '_blank');
+    }
+}
+
+function copyAddress() {
+    const address = "Av Centenario 1100, Colinas de Tarango, Álvaro Obregón, 01620 Ciudad de México, CDMX";
+    
+    // Intentar usar la API moderna del portapapeles
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(address).then(() => {
+            showLocationNotification('✅ Dirección copiada al portapapeles', 'success');
+        }).catch(() => {
+            fallbackCopyTextToClipboard(address);
+        });
+    } else {
+        fallbackCopyTextToClipboard(address);
+    }
+}
+
+function shareTransportInfo() {
+    const transportInfo = `🚌 Opciones de Transporte - Boda Ceci & Ángel
+
+📍 Lugar: Jardín Los Rosales
+📅 Ceremonia: 6:00 PM | Recepción: 7:00 PM
+🗺️ Dirección: Av Centenario 1100, Colinas de Tarango, Álvaro Obregón, 01620 CDMX
+
+🚇 METRO + TRANSPORTE:
+• Metro Observatorio (Línea 1) + RTP/Microbús
+• Metro Mixcoac (Línea 7/12) + RTP Ruta 57
+• Metro Tacubaya (Líneas 1/7/9) + Transporte local
+
+🚌 RTP Y MICROBÚS:
+• Rutas: 57, Z2B, Z2C, 124
+
+🚖 UBER/DIDI/TAXI:
+• Opción más cómoda (25-45 min desde el centro)
+
+🚗 EN AUTO:
+• Estacionamiento gratuito disponible
+• Vía Periférico Sur o Av. Centenario
+
+⏰ Llega 15-20 min antes de la ceremonia`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Información de Transporte - Boda Ceci & Ángel',
+            text: transportInfo
+        }).then(() => {
+            showLocationNotification('✅ Información compartida exitosamente', 'success');
+        }).catch((error) => {
+            if (error.name !== 'AbortError') {
+                copyTransportInfo(transportInfo);
+            }
+        });
+    } else {
+        copyTransportInfo(transportInfo);
+    }
+}
+
+function copyTransportInfo(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showLocationNotification('✅ Info de transporte copiada al portapapeles', 'success');
+        }).catch(() => {
+            fallbackCopyTextToClipboard(text);
+        });
+    } else {
+        fallbackCopyTextToClipboard(text);
+    }
+}
+
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showLocationNotification('✅ Texto copiado al portapapeles', 'success');
+    } catch (err) {
+        showLocationNotification('❌ No se pudo copiar el texto', 'error');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function showLocationNotification(message, type = 'success') {
+    // Reutilizar la función de notificación si ya existe, o crear una nueva
+    if (typeof showNotification === 'function') {
+        showNotification(message, type);
+    } else {
+        // Crear notificación simple si no existe la función
+        const notification = document.createElement('div');
+        notification.innerHTML = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#4dd0c7' : '#ff6b47'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-family: 'Nunito', sans-serif;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 3000);
+    }
+}

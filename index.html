@@ -6,20 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceci & Ángel - Nuestra Boda</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- CSS Files -->
     <link rel="stylesheet" href="css/splash.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
-    <!-- Splash Screen -->
+<body data-theme="light">
     <div id="splashScreen" class="splash-screen">
         <div class="splash-content">
             <div class="wedding-rings">💍</div>
@@ -30,20 +27,19 @@
         <div class="splash-background"></div>
     </div>
 
-    <!-- Audio Element -->
     <audio id="weddingMusic" loop>
         <source src="assets/audio/wedding-song.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
-    <!-- Main Invitation Content -->
     <div id="mainContent" class="main-content" style="display: none;">
         <div class="container">
-            <!-- Header con imagen de pareja -->
+            <button id="themeToggle" class="theme-toggle-btn">🌙</button>
+
             <div class="invitation-card">
                 <div class="header">
                     <div class="couple-image">
-                        <img src="assets/images/couple-photo.jpg" alt="María y Carlos"
+                        <img src="assets/images/couple-photo.jpg" alt="Ceci y Ángel"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="couple-placeholder" style="display: none;">
                             💕<br>Ceci & Ángel
@@ -55,128 +51,122 @@
                     </p>
                 </div>
 
-                <!-- Historia de amor -->
                 <div class="love-story">
                     <h3>💕 Nuestra Historia</h3>
-                    <p>Todo comenzó hace cinco años en una pequeña cafetería del centro de la ciudad. María estaba
-                        leyendo su libro favorito cuando Carlos, nervioso, le preguntó si podía compartir la mesa. Lo
-                        que empezó como una conversación casual sobre literatura se convirtió en horas de charla que
-                        parecían minutos.</p>
-                    <p>Desde ese primer encuentro, supimos que habíamos encontrado algo especial. A través de viajes,
-                        aventuras, y momentos cotidianos, nuestro amor ha crecido cada día. Ahora queremos celebrar este
-                        nuevo capítulo de nuestras vidas con las personas que más queremos.</p>
+                    <p>Nuestra historia comenzó en 2022, de la manera más inesperada. Aunque el destino nos unió, la
+                        vida nos puso a prueba, y nos distanciamos por un tiempo. Pero ese breve adiós no fue un final,
+                        sino una pausa necesaria para descubrir lo que realmente queríamos.</p>
+                    <p>Fue en mayo de 2025 cuando
+                        decidimos darnos una segunda oportunidad, una oportunidad para escribir juntos el futuro que
+                        siempre estuvo destinado para nosotros. Hoy, cada paso, cada desafío superado, nos ha unido más.
+                        Celebramos nuestro amor y nos preparamos para decir "sí, acepto" al camino que hemos construido.
+                    </p>
                     <p class="love-quote">
                         "El amor verdadero no tiene final feliz, porque el amor verdadero nunca termina"
                     </p>
                 </div>
             </div>
 
-            <!-- Detalles de la boda -->
-            <div class="invitation-card">
-                <div class="wedding-details">
-                    <h3>📅 Detalles de la Celebración</h3>
-                    <p><strong>Fecha:</strong> Sábado 30 de Octubre, 2026</p>
-                    <p><strong>Ceremonia:</strong> 4:00 PM</p>
-                    <p><strong>Recepción:</strong> 6:00 PM</p>
-                    <p><strong>Lugar:</strong> Jardín Los Rosales</p>
-                    <p><strong>Dirección:</strong> Av. de las Flores 123, Ciudad</p>
-                </div>
-            </div>
-
-            <!-- Cuenta regresiva -->
-            <div class="invitation-card">
-                <div class="countdown">
-                    <h3>⏰ Faltan:</h3>
-                    <div class="countdown-timer" id="countdown">
+            <div class="invitation-card countdown-card">
+                <div class="countdown" id="countdown">
+                    <h2 class="countdown-title">Faltan...</h2>
+                    <div class="countdown-timer">
                         <div class="time-unit">
-                            <span class="time-number" id="days">0</span>
+                            <span class="time-number" id="days">00</span>
                             <span class="time-label">Días</span>
                         </div>
                         <div class="time-unit">
-                            <span class="time-number" id="hours">0</span>
+                            <span class="time-number" id="hours">00</span>
                             <span class="time-label">Horas</span>
                         </div>
                         <div class="time-unit">
-                            <span class="time-number" id="minutes">0</span>
+                            <span class="time-number" id="minutes">00</span>
                             <span class="time-label">Minutos</span>
                         </div>
                         <div class="time-unit">
-                            <span class="time-number" id="seconds">0</span>
+                            <span class="time-number" id="seconds">00</span>
                             <span class="time-label">Segundos</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Padrinos -->
             <div class="invitation-card">
-                <h2 class="section-title">👫 Nuestros Padrinos</h2>
-                <div class="padrinos-section">
-                    <div class="padrinos-grid">
-                        <div class="padrino-card">
-                            <h4>Padrinos de Velación</h4>
-                            <p>Sr. Roberto García</p>
-                            <p>Sra. Elena García</p>
+                <div class="wedding-details">
+                    <h3>📅 Detalles de la Celebración</h3>
+                    <p><strong>Fecha:</strong> Sábado 30 de Octubre, 2026</p>
+                    <p><strong>Ceremonia:</strong> 6:00 PM</p>
+                    <p><strong>Recepción:</strong> 7:00 PM</p>
+                    <p><strong>Lugar:</strong> Lienzo Charro "La Tapatía"</p>
+                    <p><strong>Dirección:</strong> Av Centenario 1100, Colinas de Tarango, Álvaro Obregón, CDMX</p>
+                </div>
+            </div>
+
+            <div class="invitation-card">
+                <div class="location-section">
+                    <h2 class="section-title">📍 Ubicación</h2>
+
+                    <div class="location-details">
+                        <div class="venue-info">
+                            <h3>🏛️ Lienzo Charro "La Tapatía"</h3>
+                            <div class="ceremony-times">
+                                <p class="time-info"><strong>Ceremonia:</strong> 6:00 PM</p>
+                                <p class="time-info"><strong>Recepción:</strong> 7:00 PM</p>
+                                <p class="same-venue">✨ Ambos eventos en el mismo lugar ✨</p>
+                            </div>
+                            <p class="address">
+                                <strong>Dirección:</strong><br>
+                                Av Centenario 1100<br>
+                                Colinas de Tarango<br>
+                                Álvaro Obregón, 01620<br>
+                                Ciudad de México, CDMX
+                            </p>
                         </div>
-                        <div class="padrino-card">
-                            <h4>Padrinos de Arras</h4>
-                            <p>Sr. Miguel Rodríguez</p>
-                            <p>Sra. Carmen Rodríguez</p>
+
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps?ll=19.363949,-99.220947&z=16&t=m&hl=es-419&gl=MX&mapclient=embed&cid=7209173288837553955" width="100%" height="400"
+                                style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <div class="padrino-card">
-                            <h4>Padrinos de Anillos</h4>
-                            <p>Ana López</p>
-                            <p>David Martín</p>
-                        </div>
-                        <div class="padrino-card">
-                            <h4>Padrinos de Lazo</h4>
-                            <p>Sr. Fernando Sánchez</p>
-                            <p>Sra. Patricia Sánchez</p>
+
+                        <div class="location-info-grid">
+                            <div class="info-card">
+                                <div class="info-icon">🚗</div>
+                                <h4>En Auto</h4>
+                                <p>Estacionamiento gratuito disponible<br> <small>Vía Periférico Sur o Av. Centenario</small> </p>
+                            </div>
+                            <div class="info-card transport-card">
+                                <div class="info-icon">🚌</div>
+                                <h4>RTP y Microbús</h4>
+                                <p>Rutas directas: 57, Z2B, Z2C, 124<br>
+                                    <small>Desde diferentes puntos de la ciudad</small></p>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">🚖</div>
+                                <h4>Uber/DiDi/Taxi</h4>
+                                <p>Opción más cómoda y directa<br>
+                                    <small>Aproximadamente 25-45 min desde el centro</small></p>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">⏰</div>
+                                <h4>Tiempo de Viaje</h4>
+                                <p>Llega 15-20 min antes de la ceremonia<br>
+                                    <small>Considera tráfico de fin de semana</small></p>
+                            </div>
+                            <div class="info-card future-transport">
+                                <div class="info-icon">🚠</div>
+                                <h4>Próximamente</h4>
+                                <p>Cablebús Línea 5 conectará con Metro Mixcoac<br>
+                                    <small>En construcción - disponible en 2026</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Servicios -->
-            <div class="invitation-card">
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>📸 Álbum de Fotos</h3>
-                        <p>Comparte tus fotos de la celebración</p>
-                        <div class="qr-code">
-                            <div id="qrcode-container"></div>
-                        </div>
-                        <p class="service-description">
-                            Escanea el código para acceder al álbum compartido de Google Drive o bien, puedes darle
-                            click en el botón
-                        </p>
-                        <button class="btn"
-                            onclick="window.open('https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD?usp=drive_link', '_blank')">
-                            Subir Fotos
-                        </button>
-                    </div>
-
-                    <div class="service-card">
-                        <h3>🎁 Mesa de Regalos</h3>
-                        <p>Tu presencia es nuestro regalo, pero si deseas obsequiarnos algo:</p>
-                        <div class="gift-lists">
-                            <p><strong>Liverpool:</strong></p>
-                            <p>Lista #12345678</p>
-                            <p><strong>Amazon:</strong></p>
-                            <p>Lista de bodas Ceci & Ángel</p>
-                        </div>
-                        <button class="btn" onclick="window.open('https://www.liverpool.com.mx', '_blank')">
-                            Ver Lista Liverpool
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Confirmación de asistencia -->
             <div class="invitation-card">
                 <h2 class="section-title">✉️ Confirmación de Asistencia</h2>
                 <div class="confirmation-form">
-                    <!-- Búsqueda de invitado -->
                     <div class="guest-search-section">
                         <h4>Buscar mi invitación</h4>
                         <div class="form-group">
@@ -218,8 +208,7 @@
                                 acompañantes.</p>
 
                             <div id="companionsList">
-                                <!-- Los acompañantes se agregan dinámicamente -->
-                            </div>
+                                </div>
 
                             <button type="button" class="btn btn-secondary" id="addCompanionBtn"
                                 onclick="addCompanion()">
@@ -240,26 +229,46 @@
                 </div>
             </div>
 
-            <!-- Music Control -->
-            <div class="music-control">
-                <button id="musicToggle" onclick="toggleMusic()">🎵</button>
+            <div class="invitation-card">
+                <h2 class="section-title">🎁 Mesa de Regalos</h2>
+                <p>Tu presencia es nuestro mejor regalo. Sin embargo, si deseas contribuir a nuestra nueva vida, te
+                    agradecemos de corazón.</p>
+                <p>Puedes escanear el código QR para ver las opciones de regalos:</p>
+                <div class="qr-code-container">
+                    <div id="qrcode-container"></div>
+                    <a href="URL_DEL_DRIVE_DE_REGALOS" target="_blank" class="btn main-btn">
+                        Ver Lista de Regalos
+                    </a>
+                </div>
+            </div>
+
+            <div class="invitation-card">
+                <h2 class="section-title">📸 Drive de Fotos</h2>
+                <p>Comparte tus momentos especiales. Sube las fotos de la boda a nuestro Drive compartido.</p>
+                <a href="URL_DEL_DRIVE_DE_FOTOS" target="_blank" class="btn main-btn">
+                    Subir Fotos
+                </a>
+            </div>
+
+            <div class="footer">
+                <p>© 2026 Ceci & Ángel. Todos los derechos reservados.</p>
+                <div class="footer-buttons">
+                    <button class="btn music-toggle-btn" id="musicToggle" onclick="toggleMusic()">🎵</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Files -->
     <script>
-        // const SEARCH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1qWvbXP8eOGCQ3kJcF2dfKdfPjsKLzmn6rs7AHAceEMkNzlwLLyZCT3Z0W6dWhKWj/exec';
-        // Asegúrate de que esta URL sea la URL de tu aplicación web de Google Apps Script
+        const SEARCH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1qWvbXP8eOGCQ3kJcF2dfKdfPjsKLzmn6rs7AHAceEMkNzlwLLyZCT3Z0W6dWhKWj/exec';
     </script>
     <script src="js/main.js"></script>
     <script src="js/form-handler.js"></script>
-    <script src="js/countdown.js"></script>    
+    <script src="js/countdown.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const qrCodeUrl = "https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD?usp=drive_link";
+            const qrCodeUrl = "URL_DEL_DRIVE_DE_REGALOS"; // Reemplaza con tu URL
             const qrcodeContainer = document.getElementById("qrcode-container");
 
             if (qrcodeContainer) {
@@ -267,16 +276,12 @@
                     text: qrCodeUrl,
                     width: 150,
                     height: 150,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
+                    colorDark: "#3e2815", // Marrón para el código QR
+                    colorLight: "#faf7f2", // Crema para el fondo
                     correctLevel: QRCode.CorrectLevel.H
                 });
-                console.log('Código QR de Drive generado correctamente.');
-            } else {
-                console.error('El contenedor #qrcode-container no fue encontrado.');
             }
         });
     </script>
 </body>
-
 </html>

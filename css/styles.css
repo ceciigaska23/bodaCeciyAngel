@@ -1,4 +1,54 @@
-/* ===== MAIN STYLES - WEDDING INVITATION ===== */
+/* ===== VARIABLES CSS PARA TEMAS ===== */
+:root {
+    /* Paleta de colores */
+    --green: #33866c;
+    --dark-green: #2b5952;
+    --cream: #faf7f2;
+    --brown: #3e2815;
+    --red: #e02626;
+
+    /* Tema Claro */
+    --bg-color-light: var(--cream);
+    --bg-gradient-light: linear-gradient(135deg, var(--cream) 0%, #fefcf9 100%);
+    --card-bg-light: rgba(255, 255, 255, 0.95);
+    --text-color-light: var(--brown);
+    --primary-color-light: var(--green);
+    --secondary-color-light: var(--dark-green);
+    --tertiary-color-light: var(--red);
+    --border-color-light: rgba(51, 134, 108, 0.2);
+    --shadow-color-light: rgba(51, 134, 108, 0.15);
+    --countdown-bg-light: linear-gradient(135deg, var(--green), var(--dark-green));
+    --countdown-text-light: white;
+    --countdown-unit-bg-light: rgba(255, 255, 255, 0.2);
+    --countdown-unit-text-light: white;
+    --countdown-label-text-light: rgba(255, 255, 255, 0.8);
+    --countdown-unit-border-light: rgba(255, 255, 255, 0.3);
+}
+
+/* Tema Oscuro */
+[data-theme="dark"] {
+    --bg-color-light: #2c3e50;
+    --bg-gradient-light: linear-gradient(135deg, #1f2a3a 0%, #2c3e50 100%);
+    --card-bg-light: rgba(44, 62, 80, 0.95);
+    --text-color-light: #ecf0f1;
+    --primary-color-light: #3ac5bb;
+    --secondary-color-light: #8dc1cc;
+    --tertiary-color-light: #ff8c69;
+    --border-color-light: rgba(60, 180, 170, 0.2);
+    --shadow-color-light: rgba(0, 0, 0, 0.4);
+    --countdown-bg-light: linear-gradient(135deg, var(--primary-color-light), var(--secondary-color-light));
+    --countdown-text-light: #fefefe;
+    --countdown-unit-bg-light: rgba(255, 255, 255, 0.1);
+    --countdown-unit-text-light: #fefefe;
+    --countdown-label-text-light: rgba(255, 255, 255, 0.7);
+    --countdown-unit-border-light: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== FONT IMPORTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap');
+
+
+/* ===== GENERAL STYLES - WEDDING INVITATION ===== */
 * {
     margin: 0;
     padding: 0;
@@ -8,9 +58,10 @@
 body {
     font-family: 'Nunito', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #fff2e6 0%, #fef7f0 100%);
+    color: var(--text-color-light);
+    background: var(--bg-gradient-light);
     min-height: 100vh;
+    transition: background-color 0.5s ease;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -30,19 +81,19 @@ body {
 }
 
 .invitation-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--card-bg-light);
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(77, 208, 199, 0.15);
+    box-shadow: 0 20px 40px var(--shadow-color-light);
     backdrop-filter: blur(10px);
     padding: 40px;
     margin: 20px 0;
-    border: 1px solid rgba(77, 208, 199, 0.2);
+    border: 1px solid var(--border-color-light);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .invitation-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(77, 208, 199, 0.2);
+    box-shadow: 0 25px 50px var(--shadow-color-light);
 }
 
 /* ===== HEADER SECTION ===== */
@@ -55,21 +106,21 @@ body {
     font-family: 'Great Vibes', cursive;
     font-size: 4rem;
     font-weight: bold;
-    color: #4dd0c7;
+    color: var(--primary-color-light);
     margin: 20px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     animation: nameGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes nameGlow {
-    0% { color: #4dd0c7; }
-    100% { color: #3ac5bb; }
+    0% { color: var(--primary-color-light); }
+    100% { color: var(--secondary-color-light); }
 }
 
 .wedding-announcement {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.5rem;
-    color: #5a9aa8;
+    color: var(--secondary-color-light);
     font-style: italic;
     font-weight: 600;
 }
@@ -79,11 +130,11 @@ body {
     height: 220px;
     border-radius: 50%;
     margin: 0 auto 30px;
-    background: linear-gradient(45deg, #4dd0c7, #7bb5a8);
+    background: linear-gradient(45deg, var(--primary-color-light), var(--secondary-color-light));
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 15px 35px rgba(77, 208, 199, 0.3);
+    box-shadow: 0 15px 35px rgba(51, 134, 108, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -122,11 +173,11 @@ body {
 
 /* ===== LOVE STORY SECTION ===== */
 .love-story {
-    background: linear-gradient(135deg, #fef7f0, #fff2e6);
+    background: linear-gradient(135deg, var(--bg-color-light), var(--bg-color-light));
     padding: 35px;
     border-radius: 20px;
     margin: 30px 0;
-    border-left: 6px solid #4dd0c7;
+    border-left: 6px solid var(--primary-color-light);
     position: relative;
     overflow: hidden;
 }
@@ -138,13 +189,13 @@ body {
     right: 0;
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(77, 208, 199, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(51, 134, 108, 0.1) 0%, transparent 70%);
     border-radius: 50%;
 }
 
 .love-story h3 {
     font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
+    color: var(--primary-color-light);
     margin-bottom: 20px;
     font-size: 1.8rem;
     font-weight: 600;
@@ -158,25 +209,33 @@ body {
 
 .love-quote {
     font-style: italic;
-    color: #5a9aa8;
+    color: var(--secondary-color-light);
     text-align: center;
     margin-top: 25px;
     font-size: 1.2rem;
     font-weight: 500;
-    border-top: 2px solid #4dd0c7;
+    border-top: 2px solid var(--primary-color-light);
     padding-top: 20px;
 }
 
 /* ===== COUNTDOWN SECTION ===== */
+.countdown-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
 .countdown {
     text-align: center;
     margin: 40px 0;
     padding: 35px;
-    background: linear-gradient(135deg, #4dd0c7, #7bb5a8);
+    background: var(--countdown-bg-light);
     border-radius: 20px;
-    color: white;
+    color: var(--countdown-text-light);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .countdown::before {
@@ -201,13 +260,14 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-.countdown h3 {
+.countdown-title {
     font-family: 'Quicksand', sans-serif;
     margin-bottom: 25px;
     font-size: 2rem;
     font-weight: 600;
     z-index: 1;
     position: relative;
+    color: var(--countdown-text-light);
 }
 
 .countdown-timer {
@@ -220,12 +280,16 @@ body {
 }
 
 .time-unit {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--countdown-unit-bg-light);
     padding: 20px;
     border-radius: 15px;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--countdown-unit-border-light);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .time-unit:hover {
@@ -238,6 +302,7 @@ body {
     font-weight: bold;
     display: block;
     animation: numberPulse 2s ease-in-out infinite;
+    color: var(--countdown-unit-text-light);
 }
 
 @keyframes numberPulse {
@@ -250,22 +315,23 @@ body {
     font-size: 1rem;
     opacity: 0.9;
     font-weight: 500;
+    color: var(--countdown-label-text-light);
 }
 
 /* ===== WEDDING DETAILS ===== */
 .wedding-details {
     text-align: center;
-    background: linear-gradient(135deg, #fff, #fef7f0);
+    background: linear-gradient(135deg, var(--card-bg-light), var(--bg-color-light));
     padding: 35px;
     border-radius: 20px;
     margin: 30px 0;
-    border: 2px solid #4dd0c7;
-    box-shadow: 0 10px 30px rgba(77, 208, 199, 0.1);
+    border: 2px solid var(--primary-color-light);
+    box-shadow: 0 10px 30px var(--shadow-color-light);
 }
 
 .wedding-details h3 {
     font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
+    color: var(--primary-color-light);
     margin-bottom: 20px;
     font-size: 1.8rem;
     font-weight: 600;
@@ -274,11 +340,11 @@ body {
 .wedding-details p {
     margin: 12px 0;
     font-size: 1.2rem;
-    color: #5a9aa8;
+    color: var(--secondary-color-light);
 }
 
 .wedding-details strong {
-    color: #4dd0c7;
+    color: var(--primary-color-light);
     font-weight: 600;
 }
 
@@ -286,7 +352,7 @@ body {
 .section-title {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
-    color: #4dd0c7;
+    color: var(--primary-color-light);
     font-size: 2.5rem;
     margin: 50px 0 30px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -302,474 +368,487 @@ body {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #4dd0c7, #7bb5a8);
+    background: linear-gradient(90deg, var(--primary-color-light), var(--secondary-color-light));
     border-radius: 2px;
 }
 
-/* ===== PADRINOS SECTION ===== */
-.padrinos-section {
-    margin: 40px 0;
+/* ===== LOCATION & TRANSPORT SECTION ===== */
+.location-section {
+    text-align: center;
 }
 
-.padrinos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+.location-details {
     margin-top: 30px;
 }
 
-.padrino-card {
-    background: linear-gradient(135deg, #fff, #fef7f0);
+.venue-info {
+    background: linear-gradient(135deg, var(--bg-color-light), var(--bg-color-light));
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--primary-color-light);
+}
+
+.venue-info h3 {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--primary-color-light);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.ceremony-times {
+    background: rgba(51, 134, 108, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 2px solid rgba(51, 134, 108, 0.3);
+}
+
+.time-info {
+    color: var(--primary-color-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 8px 0;
+}
+
+.time-info strong {
+    color: var(--primary-color-light);
+}
+
+.same-venue {
+    color: var(--secondary-color-light);
+    font-style: italic;
+    font-weight: 500;
+    margin: 15px 0 5px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.address {
+    color: var(--secondary-color-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.address strong {
+    color: var(--primary-color-light);
+    font-weight: 600;
+}
+
+/* Contenedor del mapa */
+.map-container {
+    position: relative;
+    margin: 30px 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px var(--shadow-color-light);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+}
+
+/* Grid de información */
+.location-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.info-card {
+    background: var(--card-bg-light);
     padding: 25px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(77, 208, 199, 0.1);
-    border: 2px solid #4dd0c7;
+    border: 2px solid var(--border-color-light);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-.padrino-card::before {
+.info-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #4dd0c7, #7bb5a8, #5a9aa8);
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color-light), var(--secondary-color-light));
 }
 
-.padrino-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(77, 208, 199, 0.2);
-}
-
-.padrino-card h4 {
-    font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.padrino-card p {
-    color: #5a9aa8;
-    font-weight: 500;
-    margin: 8px 0;
-}
-
-/* ===== SERVICES GRID ===== */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 35px;
-    margin: 40px 0;
-}
-
-.service-card {
-    background: linear-gradient(135deg, #fff, #fef7f0);
-    padding: 35px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(77, 208, 199, 0.1);
-    border: 2px solid #4dd0c7;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(77, 208, 199, 0.1) 0%, transparent 70%);
-    transition: all 0.3s ease;
-}
-
-.service-card:hover::before {
-    top: -30%;
-    right: -30%;
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 45px rgba(77, 208, 199, 0.2);
-}
-
-.service-card h3 {
-    font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    z-index: 1;
-    position: relative;
-}
-
-.service-card p {
-    color: #5a9aa8;
-    margin-bottom: 20px;
-    z-index: 1;
-    position: relative;
-}
-
-.service-description {
-    font-size: 0.95rem;
-    color: #66a693;
-    font-style: italic;
-}
-
-.gift-lists {
-    margin: 25px 0;
-    padding: 20px;
-    background: rgba(77, 208, 199, 0.05);
-    border-radius: 10px;
-    border-left: 4px solid #4dd0c7;
-}
-
-.gift-lists strong {
-    color: #4dd0c7;
-    font-weight: 600;
-}
-
-/* ===== QR CODE ===== */
-.qr-code {
-    width: 140px;
-    height: 140px;
-    margin: 20px auto;
-    background: #f8f8f8;
-    border: 3px solid #4dd0c7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    font-weight: bold;
-    color: #5a9aa8;
-    box-shadow: 0 5px 15px rgba(77, 208, 199, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.qr-code:hover {
-    transform: scale(1.05);
-}
-
-.qr-code img {
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
-}
-
-/* ===== BUTTONS ===== */
-.btn {
-    background: linear-gradient(135deg, #4dd0c7, #7bb5a8);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(77, 208, 199, 0.3);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-    z-index: -1;
-}
-
-.btn:hover::before {
-    left: 100%;
-}
-
-.btn:hover {
+.info-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(77, 208, 199, 0.4);
+    box-shadow: 0 10px 25px var(--shadow-color-light);
+    background: rgba(255, 255, 255, 0.95);
 }
 
-.btn:active {
-    transform: translateY(-1px);
+.transport-card {
+    grid-column: span 1;
 }
 
-.btn-secondary {
-    background: linear-gradient(135deg, #66a693, #5a9aa8);
-    font-size: 0.9rem;
-    padding: 10px 20px;
+.transport-options {
+    text-align: left;
+    margin: 10px 0;
 }
 
-.btn-submit {
-    width: 100%;
-    font-size: 1.3rem;
-    padding: 18px;
-    background: linear-gradient(135deg, #ff6b47, #e55a3c);
-    box-shadow: 0 8px 20px rgba(255, 107, 71, 0.3);
+.transport-options p {
+    margin: 8px 0;
+    padding-left: 5px;
 }
 
-.btn-submit:hover {
-    box-shadow: 0 12px 28px rgba(255, 107, 71, 0.4);
-}
-
-/* ===== CONFIRMATION FORM ===== */
-.confirmation-form {
-    background: linear-gradient(135deg, #fef7f0, #fff2e6);
-    padding: 35px;
-    border-radius: 20px;
-    margin: 40px 0;
-    border: 1px solid rgba(77, 208, 199, 0.2);
-}
-
-.guest-search-section {
-    background: rgba(77, 208, 199, 0.05);
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    border-left: 5px solid #4dd0c7;
-}
-
-.guest-search-section h4 {
-    font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
+.transport-options strong {
+    color: var(--primary-color-light);
     font-weight: 600;
+}
+
+.future-transport {
+    border: 2px dashed rgba(51, 134, 108, 0.4);
+    background: rgba(51, 134, 108, 0.05);
+}
+
+.future-transport .info-icon {
+    opacity: 0.7;
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    animation: infoIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes infoIconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+.info-card h4 {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--primary-color-light);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* ===== RSVP SECTION ===== */
+.rsvp-card {
+    text-align: center;
+}
+
+.rsvp-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    margin: 20px 0;
+    color: var(--secondary-color-light);
+}
+
+.search-input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    border: 2px solid var(--border-color-light);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-color-light);
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color-light);
+    box-shadow: 0 0 10px rgba(51, 134, 108, 0.3);
+    outline: none;
+}
+
+.search-button {
+    background: linear-gradient(45deg, var(--primary-color-light), var(--secondary-color-light));
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(51, 134, 108, 0.4);
 }
 
 .search-result {
-    margin-top: 15px;
+    margin-top: 20px;
     padding: 15px;
     border-radius: 10px;
-    display: none;
+    background: rgba(51, 134, 108, 0.1);
+    border: 1px solid rgba(51, 134, 108, 0.3);
+    color: var(--secondary-color-light);
 }
 
-.search-result.success {
-    background: rgba(77, 208, 199, 0.1);
-    border: 2px solid #4dd0c7;
-    color: #3ac5bb;
+.guest-info {
+    margin-top: 25px;
 }
 
-.search-result.error {
-    background: rgba(255, 107, 71, 0.1);
-    border: 2px solid #ff6b47;
-    color: #e55a3c;
+.guest-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    border: 2px solid var(--border-color-light);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-color-light);
+    margin: 10px 0;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+.guest-input:focus {
+    border-color: var(--primary-color-light) !important;
+    box-shadow: 0 0 10px rgba(51, 134, 108, 0.3);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.submit-button {
+    background: linear-gradient(45deg, var(--tertiary-color-light), var(--tertiary-color-light));
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(224, 38, 38, 0.4);
+}
+
+/* ===== QR SECTION ===== */
+.qr-section {
+    text-align: center;
+}
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#qrcode-container {
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qr-section p {
+    color: var(--secondary-color-light);
+    line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    color: var(--secondary-color-light);
+}
+
+.footer-buttons {
+    margin-top: 15px;
+}
+
+.music-toggle-btn {
+    background: var(--card-bg-light);
+    color: var(--primary-color-light);
+    border: 2px solid var(--primary-color-light);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-color-light);
+}
+
+.music-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Botón de tema */
+.theme-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: var(--card-bg-light);
+    color: var(--primary-color-light);
+    border: 2px solid var(--primary-color-light);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-color-light);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .couple-names {
+        font-size: 3rem;
+    }
+
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* New Form Styles */
+.confirmation-form {
+    padding: 20px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 15px;
+    background: linear-gradient(145deg, var(--bg-color-light), var(--card-bg-light));
+    margin-top: 20px;
+}
+
+.confirmation-form h4 {
+    color: var(--primary-color-light);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    color: #4dd0c7;
-    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--secondary-color-light);
 }
 
-.form-group input, 
-.form-group select, 
-.form-group textarea {
+.form-group input,
+.form-group textarea,
+.form-group select {
     width: 100%;
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
+    color: var(--text-color-light);
+    background: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.8);
 }
 
-.form-group input:focus, 
-.form-group select:focus, 
-.form-group textarea:focus {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
-    border-color: #4dd0c7;
-    box-shadow: 0 0 0 3px rgba(77, 208, 199, 0.1);
-    background: white;
+    border-color: var(--primary-color-light);
+    box-shadow: 0 0 8px rgba(51, 134, 108, 0.4);
 }
 
-.form-group input[readonly] {
-    background: #f5f5f5;
-    cursor: not-allowed;
-}
-
-/* ===== COMPANIONS SECTION ===== */
-.companions-section {
-    background: rgba(123, 181, 168, 0.1);
-    padding: 25px;
-    border-radius: 15px;
-    margin: 25px 0;
-    border: 2px solid rgba(77, 208, 199, 0.3);
-}
-
-.companions-section h4 {
-    font-family: 'Quicksand', sans-serif;
-    color: #4dd0c7;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
     font-weight: 600;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit {
+    background: linear-gradient(45deg, var(--tertiary-color-light), var(--tertiary-color-light));
+    color: white;
+    border: none;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(224, 38, 38, 0.4);
+}
+
+.btn-secondary {
+    background: var(--card-bg-light);
+    color: var(--secondary-color-light);
+    border: 2px solid var(--secondary-color-light);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: var(--secondary-color-light);
+    color: white;
 }
 
 .companions-info {
-    color: #5a9aa8;
-    margin-bottom: 20px;
-    font-weight: 500;
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--secondary-color-light);
+    margin-bottom: 15px;
 }
 
-.companions-info span {
-    color: #4dd0c7;
-    font-weight: bold;
+.companions-section {
+    border-top: 1px solid var(--border-color-light);
+    padding-top: 20px;
+    margin-top: 20px;
 }
 
-.companion-entry {
-    display: grid;
-    grid-template-columns: 1fr 120px auto;
-    gap: 15px;
-    margin-bottom: 20px;
-    align-items: end;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 12px;
-    border: 1px solid rgba(77, 208, 199, 0.2);
+.companions-section h4 {
+    color: var(--secondary-color-light);
 }
 
-#addCompanionBtn {
-    margin-top: 15px;
-    background: linear-gradient(135deg, #7bb5a8, #66a693);
+.companions-list {
+    margin-top: 10px;
 }
 
-/* ===== MUSIC CONTROL ===== */
-.music-control {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
+.companion-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-#musicToggle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4dd0c7, #7bb5a8);
-    border: none;
-    font-size: 1.5rem;
+.companion-input-group input {
+    flex-grow: 1;
+}
+
+.remove-companion-btn {
+    background: var(--tertiary-color-light);
     color: white;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(77, 208, 199, 0.4);
-    transition: all 0.3s ease;
-    animation: musicPulse 2s ease-in-out infinite;
-}
-
-@keyframes musicPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-#musicToggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 12px 25px rgba(77, 208, 199, 0.5);
-}
-
-#musicToggle.paused {
-    background: linear-gradient(135deg, #666, #888);
-    animation: none;
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .invitation-card {
-        padding: 25px;
-    }
-    
-    .couple-names {
-        font-size: 3rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .countdown-timer {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .time-number {
-        font-size: 2rem;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .padrinos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-    
-    .companion-entry {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .music-control {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    #musicToggle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .couple-names {
-        font-size: 2.5rem;
-    }
-    
-    .wedding-announcement {
-        font-size: 1.2rem;
-    }
-    
-    .couple-image {
-        width: 180px;
-        height: 180px;
-    }
-    
-    .couple-image img {
-        width: 160px;
-        height: 160px;
-    }
-    
-    .love-story, .confirmation-form, .service-card {
-        padding: 20px;
-    }
-    
-    .time-number {
-        font-size: 1.8rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
