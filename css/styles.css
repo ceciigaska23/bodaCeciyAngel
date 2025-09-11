@@ -1,23 +1,32 @@
-/* ===== VARIABLES CSS PARA TEMAS ===== */
+/* ===== VARIABLES CSS PARA PALETA TERRACOTTA ===== */
 :root {
-    /* Paleta de colores */
-    --green: #33866c;
-    --dark-green: #2b5952;
-    --cream: #faf7f2;
-    --brown: #3e2815;
-    --red: #e02626;
+    /* Paleta de colores Terracotta */
+    --sage-light: #a8c4a2;
+    --sage-medium: #7bb5a8;
+    --sage-dark: #4a6741;
+    --teal-light: #4dd0c7;
+    --teal-dark: #378b85;
+    --cream-light: #fdf8f0;
+    --cream: #f5ede4;
+    --cream-dark: #e6d7c3;
+    --terracotta-light: #e6a085;
+    --terracotta: #d4764f;
+    --terracotta-dark: #b85a3e;
+    --brown-light: #8b6f47;
+    --brown: #6b5b73;
+    --brown-dark: #4a3d2a;
 
     /* Tema Claro */
-    --bg-color-light: var(--cream);
-    --bg-gradient-light: linear-gradient(135deg, var(--cream) 0%, #fefcf9 100%);
-    --card-bg-light: rgba(255, 255, 255, 0.95);
-    --text-color-light: var(--brown);
-    --primary-color-light: var(--green);
-    --secondary-color-light: var(--dark-green);
-    --tertiary-color-light: var(--red);
-    --border-color-light: rgba(51, 134, 108, 0.2);
-    --shadow-color-light: rgba(51, 134, 108, 0.15);
-    --countdown-bg-light: linear-gradient(135deg, var(--green), var(--dark-green));
+    --bg-color-light: var(--cream-light);
+    --bg-gradient-light: linear-gradient(135deg, var(--cream-light) 0%, var(--cream) 100%);
+    --card-bg-light: rgba(253, 248, 240, 0.9);
+    --text-color-light: var(--brown-dark);
+    --primary-color-light: var(--teal-dark);
+    --secondary-color-light: var(--sage-dark);
+    --tertiary-color-light: var(--terracotta);
+    --border-color-light: rgba(55, 139, 133, 0.2);
+    --shadow-color-light: rgba(55, 139, 133, 0.15);
+    --countdown-bg-light: linear-gradient(135deg, var(--teal-dark), var(--sage-medium));
     --countdown-text-light: white;
     --countdown-unit-bg-light: rgba(255, 255, 255, 0.2);
     --countdown-unit-text-light: white;
@@ -28,15 +37,15 @@
 /* Tema Oscuro */
 [data-theme="dark"] {
     --bg-color-light: #2c3e50;
-    --bg-gradient-light: linear-gradient(135deg, #1f2a3a 0%, #2c3e50 100%);
-    --card-bg-light: rgba(44, 62, 80, 0.95);
+    --bg-gradient-light: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+    --card-bg-light: rgba(44, 62, 80, 0.9);
     --text-color-light: #ecf0f1;
-    --primary-color-light: #3ac5bb;
-    --secondary-color-light: #8dc1cc;
-    --tertiary-color-light: #ff8c69;
-    --border-color-light: rgba(60, 180, 170, 0.2);
+    --primary-color-light: var(--teal-light);
+    --secondary-color-light: var(--sage-medium);
+    --tertiary-color-light: var(--terracotta-light);
+    --border-color-light: rgba(77, 208, 199, 0.3);
     --shadow-color-light: rgba(0, 0, 0, 0.4);
-    --countdown-bg-light: linear-gradient(135deg, var(--primary-color-light), var(--secondary-color-light));
+    --countdown-bg-light: linear-gradient(135deg, var(--teal-light), var(--sage-medium));
     --countdown-text-light: #fefefe;
     --countdown-unit-bg-light: rgba(255, 255, 255, 0.1);
     --countdown-unit-text-light: #fefefe;
@@ -46,7 +55,6 @@
 
 /* ===== FONT IMPORTS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap');
-
 
 /* ===== GENERAL STYLES - WEDDING INVITATION ===== */
 * {
@@ -61,7 +69,7 @@ body {
     color: var(--text-color-light);
     background: var(--bg-gradient-light);
     min-height: 100vh;
-    transition: background-color 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -134,7 +142,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 15px 35px rgba(51, 134, 108, 0.3);
+    box-shadow: 0 15px 35px var(--shadow-color-light);
     position: relative;
     overflow: hidden;
 }
@@ -173,13 +181,17 @@ body {
 
 /* ===== LOVE STORY SECTION ===== */
 .love-story {
-    background: linear-gradient(135deg, var(--bg-color-light), var(--bg-color-light));
+    background: var(--cream);
     padding: 35px;
     border-radius: 20px;
     margin: 30px 0;
     border-left: 6px solid var(--primary-color-light);
     position: relative;
     overflow: hidden;
+}
+
+[data-theme="dark"] .love-story {
+    background: rgba(44, 62, 80, 0.7);
 }
 
 .love-story::before {
@@ -189,7 +201,7 @@ body {
     right: 0;
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(51, 134, 108, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(55, 139, 133, 0.1) 0%, transparent 70%);
     border-radius: 50%;
 }
 
@@ -205,6 +217,7 @@ body {
     margin-bottom: 15px;
     font-size: 1.1rem;
     line-height: 1.8;
+    color: var(--text-color-light);
 }
 
 .love-quote {
@@ -235,7 +248,7 @@ body {
     color: var(--countdown-text-light);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 35px var(--shadow-color-light);
 }
 
 .countdown::before {
@@ -321,7 +334,7 @@ body {
 /* ===== WEDDING DETAILS ===== */
 .wedding-details {
     text-align: center;
-    background: linear-gradient(135deg, var(--card-bg-light), var(--bg-color-light));
+    background: var(--card-bg-light);
     padding: 35px;
     border-radius: 20px;
     margin: 30px 0;
@@ -382,11 +395,15 @@ body {
 }
 
 .venue-info {
-    background: linear-gradient(135deg, var(--bg-color-light), var(--bg-color-light));
+    background: var(--cream);
     padding: 25px;
     border-radius: 15px;
     margin-bottom: 30px;
     border-left: 5px solid var(--primary-color-light);
+}
+
+[data-theme="dark"] .venue-info {
+    background: rgba(44, 62, 80, 0.7);
 }
 
 .venue-info h3 {
@@ -398,11 +415,11 @@ body {
 }
 
 .ceremony-times {
-    background: rgba(51, 134, 108, 0.1);
+    background: rgba(55, 139, 133, 0.1);
     padding: 20px;
     border-radius: 12px;
     margin: 20px 0;
-    border: 2px solid rgba(51, 134, 108, 0.3);
+    border: 2px solid var(--border-color-light);
 }
 
 .time-info {
@@ -484,7 +501,6 @@ body {
 .info-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px var(--shadow-color-light);
-    background: rgba(255, 255, 255, 0.95);
 }
 
 .transport-card {
@@ -507,8 +523,8 @@ body {
 }
 
 .future-transport {
-    border: 2px dashed rgba(51, 134, 108, 0.4);
-    background: rgba(51, 134, 108, 0.05);
+    border: 2px dashed var(--border-color-light);
+    background: rgba(55, 139, 133, 0.05);
 }
 
 .future-transport .info-icon {
@@ -519,6 +535,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 15px;
     animation: infoIconFloat 3s ease-in-out infinite;
+    color: var(--tertiary-color-light);
 }
 
 @keyframes infoIconFloat {
@@ -532,6 +549,10 @@ body {
     font-size: 1.2rem;
     margin-bottom: 10px;
     font-weight: 600;
+}
+
+.info-card p {
+    color: var(--text-color-light);
 }
 
 /* ===== RSVP SECTION ===== */
@@ -559,7 +580,7 @@ body {
     padding: 12px 20px;
     border: 2px solid var(--border-color-light);
     border-radius: 25px;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card-bg-light);
     color: var(--text-color-light);
     font-family: 'Nunito', sans-serif;
     transition: all 0.3s ease;
@@ -567,7 +588,7 @@ body {
 
 .search-input:focus {
     border-color: var(--primary-color-light);
-    box-shadow: 0 0 10px rgba(51, 134, 108, 0.3);
+    box-shadow: 0 0 10px var(--border-color-light);
     outline: none;
 }
 
@@ -585,15 +606,15 @@ body {
 
 .search-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(51, 134, 108, 0.4);
+    box-shadow: 0 8px 20px var(--shadow-color-light);
 }
 
 .search-result {
     margin-top: 20px;
     padding: 15px;
     border-radius: 10px;
-    background: rgba(51, 134, 108, 0.1);
-    border: 1px solid rgba(51, 134, 108, 0.3);
+    background: rgba(55, 139, 133, 0.1);
+    border: 1px solid var(--border-color-light);
     color: var(--secondary-color-light);
 }
 
@@ -607,7 +628,7 @@ body {
     padding: 12px 20px;
     border: 2px solid var(--border-color-light);
     border-radius: 25px;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card-bg-light);
     color: var(--text-color-light);
     margin: 10px 0;
     text-align: center;
@@ -616,13 +637,13 @@ body {
 
 .guest-input:focus {
     border-color: var(--primary-color-light) !important;
-    box-shadow: 0 0 10px rgba(51, 134, 108, 0.3);
+    box-shadow: 0 0 10px var(--border-color-light);
     outline: none;
     transform: translateY(-1px);
 }
 
 .submit-button {
-    background: linear-gradient(45deg, var(--tertiary-color-light), var(--tertiary-color-light));
+    background: linear-gradient(45deg, var(--tertiary-color-light), var(--terracotta-dark));
     color: white;
     padding: 15px 30px;
     border: none;
@@ -636,7 +657,7 @@ body {
 
 .submit-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(224, 38, 38, 0.4);
+    box-shadow: 0 8px 20px rgba(212, 118, 79, 0.4);
 }
 
 /* ===== QR SECTION ===== */
@@ -652,15 +673,17 @@ body {
     margin-top: 20px;
 }
 
-#qrcode-container {
+#qrcode-container,
+#qrcode-photos {
     background: white;
-    padding: 10px;
+    padding: 15px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px var(--shadow-color-light);
+    border: 3px solid var(--primary-color-light);
 }
 
 .qr-section p {
-    color: var(--secondary-color-light);
+    color: var(--text-color-light);
     line-height: 1.6;
 }
 
@@ -692,6 +715,8 @@ body {
 
 .music-toggle-btn:hover {
     transform: scale(1.1);
+    background: var(--primary-color-light);
+    color: white;
 }
 
 /* Botón de tema */
@@ -713,6 +738,12 @@ body {
     box-shadow: 0 5px 15px var(--shadow-color-light);
 }
 
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+    background: var(--primary-color-light);
+    color: white;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .couple-names {
@@ -722,6 +753,29 @@ body {
     .countdown-timer {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .search-input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-input {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .couple-names {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .invitation-card {
+        padding: 25px;
+    }
 }
 
 /* New Form Styles */
@@ -729,7 +783,7 @@ body {
     padding: 20px;
     border: 1px solid var(--border-color-light);
     border-radius: 15px;
-    background: linear-gradient(145deg, var(--bg-color-light), var(--card-bg-light));
+    background: var(--card-bg-light);
     margin-top: 20px;
 }
 
@@ -762,7 +816,7 @@ body {
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
     color: var(--text-color-light);
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-bg-light);
     transition: all 0.3s ease;
 }
 
@@ -771,7 +825,7 @@ body {
 .form-group select:focus {
     outline: none;
     border-color: var(--primary-color-light);
-    box-shadow: 0 0 8px rgba(51, 134, 108, 0.4);
+    box-shadow: 0 0 8px var(--border-color-light);
 }
 
 .btn {
@@ -783,17 +837,22 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    border: none;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
 }
 
 .btn-submit {
-    background: linear-gradient(45deg, var(--tertiary-color-light), var(--tertiary-color-light));
+    background: linear-gradient(45deg, var(--tertiary-color-light), var(--terracotta-dark));
     color: white;
-    border: none;
 }
 
 .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(224, 38, 38, 0.4);
+    box-shadow: 0 8px 20px rgba(212, 118, 79, 0.4);
 }
 
 .btn-secondary {
@@ -803,9 +862,17 @@ body {
 }
 
 .btn-secondary:hover {
-    transform: translateY(-2px);
     background: var(--secondary-color-light);
     color: white;
+}
+
+.main-btn {
+    background: linear-gradient(45deg, var(--primary-color-light), var(--secondary-color-light));
+    color: white;
+}
+
+.main-btn:hover {
+    box-shadow: 0 8px 20px var(--shadow-color-light);
 }
 
 .companions-info {

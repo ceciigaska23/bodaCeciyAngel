@@ -1,16 +1,17 @@
-/* ===== SPLASH SCREEN STYLES ===== */
+/* ===== SPLASH SCREEN STYLES - PALETA TERRACOTTA ===== */
 .splash-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(135deg, #4dd0c7 0%, #7bb5a8 25%, #5a9aa8 50%, #7bb5a8 75%, #4dd0c7 100%);
+    background: linear-gradient(135deg, #4dd0c7 0%, #7bb5a8 25%, #378b85 50%, #7bb5a8 75%, #4dd0c7 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
     transition: opacity 1s ease, visibility 1s ease;
+    cursor: pointer;
 }
 
 .splash-screen.fade-out {
@@ -40,6 +41,7 @@
     color: white;
     z-index: 1;
     animation: contentFadeIn 2s ease-out;
+    user-select: none;
 }
 
 @keyframes contentFadeIn {
@@ -98,7 +100,7 @@
 }
 
 .splash-button {
-    background: linear-gradient(135deg, #ff6b47, #e55a3c);
+    background: linear-gradient(135deg, #d4764f, #b85a3e);
     border: none;
     padding: 18px 40px;
     border-radius: 50px;
@@ -110,13 +112,13 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 107, 71, 0.4);
+    box-shadow: 0 8px 25px rgba(212, 118, 79, 0.4);
     margin-bottom: 1rem;
 }
 
 .splash-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255, 107, 71, 0.6);
+    box-shadow: 0 12px 35px rgba(212, 118, 79, 0.6);
 }
 
 .splash-button:active {

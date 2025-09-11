@@ -37,19 +37,7 @@ function startInvitation() {
     }, 1000);
 }
 
-// ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', function() {
-    // Asignar el evento de clic a la pantalla de splash para iniciar todo
-    if (splashScreen) {
-        splashScreen.addEventListener('click', startInvitation);
-    }
-    
-    // Aquí puedes dejar el resto de tu lógica de inicialización
-    // como setupFormHandlers(), initAnimations(), etc.
-    console.log('Invitación de boda cargada correctamente 💕');
-});
-
-// ===== THEME TOGGLE FUNCTIONALITY (NUEVO) =====
+// ===== THEME TOGGLE FUNCTIONALITY =====
 function toggleTheme() {
     const body = document.body;
     const currentTheme = body.getAttribute('data-theme');
@@ -75,21 +63,6 @@ function updateThemeToggleIcon(theme) {
 })();
 
 // ===== MUSIC FUNCTIONALITY =====
-// function playMusic() {
-//     if (weddingMusic) {
-//         weddingMusic.play()
-//             .then(() => {
-//                 musicPlaying = true;
-//                 updateMusicButton();
-//             })
-//             .catch(error => {
-//                 console.log('Error reproduciendo música:', error);
-//                 // Fallback: mostrar botón para que el usuario pueda reproducir manualmente
-//                 updateMusicButton();
-//             });
-//     }
-// }
-
 function toggleMusic() {
     if (weddingMusic.paused) {
         weddingMusic.play();
@@ -115,85 +88,9 @@ function updateMusicButton() {
     }
 }
 
-
-function updateMusicButton() {
-    if (musicToggle) {
-        if (musicPlaying) {
-            musicToggle.innerHTML = '🎵';
-            musicToggle.classList.remove('paused');
-            musicToggle.title = 'Pausar música';
-        } else {
-            musicToggle.innerHTML = '🔇';
-            musicToggle.classList.add('paused');
-            musicToggle.title = 'Reproducir música';
-        }
-    }
-}
-
 // ===== GUEST SEARCH FUNCTIONALITY =====
-// Configuración de Google Apps Script
-
 let currentGuestData = null;
 let maxCompanionsAllowed = 0;
-
-// async function searchGuest() {
-//     const searchName = document.getElementById('searchName').value.trim();
-//     const searchResult = document.getElementById('searchResult');
-//     const confirmationForm = document.getElementById('confirmationForm');
-    
-//     if (!searchName) {
-//         searchResult.innerHTML = '<p>Por favor ingresa un nombre para buscar.</p>';
-//         searchResult.className = 'search-result not-found';
-//         return;
-//     }
-    
-//     searchResult.innerHTML = '<p>Buscando...</p>';
-//     searchResult.className = 'search-result';
-    
-//     try {
-//         const response = await fetch(`${SEARCH_SCRIPT_URL}?action=search&name=${encodeURIComponent(searchName)}`);
-//         const data = await response.json();
-        
-//         if (data.found) {
-//             currentGuestData = data.guest;
-//             maxCompanionsAllowed = data.guest.maxCompanions || 0;
-            
-//             searchResult.innerHTML = `
-//                 <p><strong>¡Invitado encontrado!</strong></p>
-//                 <p><strong>Nombre:</strong> ${data.guest.name}</p>
-//                 <p><strong>Acompañantes permitidos:</strong> ${maxCompanionsAllowed}</p>
-//             `;
-//             searchResult.className = 'search-result found';
-            
-//             // Llenar el formulario
-//             document.getElementById('guestName').value = data.guest.name;
-//             document.getElementById('email').value = data.guest.email || '';
-//             document.getElementById('phone').value = data.guest.phone || '';
-            
-//             // Mostrar formulario
-//             confirmationForm.style.display = 'block';
-            
-//             // Actualizar información de acompañantes
-//             updateCompanionsInfo();
-            
-//         } else {
-//             searchResult.innerHTML = `
-//                 <p><strong>Invitado no encontrado</strong></p>
-//                 <p>Por favor verifica que hayas escrito tu nombre exactamente como aparece en la invitación, o contacta a los novios.</p>
-//             `;
-//             searchResult.className = 'search-result not-found';
-//             confirmationForm.style.display = 'none';
-//         }
-        
-//     } catch (error) {
-//         console.error('Error en búsqueda:', error);
-//         searchResult.innerHTML = `
-//             <p><strong>Error de conexión</strong></p>
-//             <p>No se pudo realizar la búsqueda. Por favor intenta nuevamente o contacta a los novios.</p>
-//         `;
-//         searchResult.className = 'search-result not-found';
-//     }
-// }
 
 // ===== COMPANIONS FUNCTIONALITY =====
 function updateCompanionsInfo() {
@@ -221,6 +118,13 @@ function addCompanion() {
     
     const newCompanion = document.createElement('div');
     newCompanion.className = 'companion-entry';
+    newCompanion.style.cssText = `
+        border: 1px solid var(--border-color-light);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        background: var(--cream);
+    `;
     newCompanion.innerHTML = `
         <div class="form-group">
             <label>Nombre del acompañante</label>
@@ -337,22 +241,36 @@ function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.innerHTML = `
-        <p>${message}</p>
-        <button onclick="this.parentElement.remove()">×</button>
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✓' : '⚠'}</span>
+            <p>${message}</p>
+            <button onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
     `;
     
-    // Agregar estilos para notificación
+    // Agregar estilos para notificación con colores de la paleta
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'success' ? '#4dd0c7' : '#ff6b47'};
-        color: white;
+        min-width: 300px;
+        max-width: 500px;
+        z-index: 10001;
+        animation: notificationSlideIn 0.3s ease-out;
+    `;
+
+    const notificationContent = notification.querySelector('.notification-content');
+    notificationContent.style.cssText = `
+        display: flex;
+        align-items: center;
         padding: 15px 20px;
+        color: white;
         border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        background: ${type === 'success' ? 
+            'linear-gradient(135deg, #378b85, #4dd0c7)' : 
+            'linear-gradient(135deg, #d4764f, #b85a3e)'};
     `;
     
     document.body.appendChild(notification);
@@ -370,37 +288,6 @@ function handleError(error, userMessage = 'Ha ocurrido un error inesperado') {
     console.error('Error:', error);
     showNotification(userMessage, 'error');
 }
-
-// ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', function() {
-    setupFormHandlers();
-    initAnimations();
-    addFadeInUpAnimation();
-    updateMusicButton();
-    
-    console.log('Invitación de boda cargada correctamente 💕');
-});
-
-// Manejar errores globales
-window.addEventListener('error', function(e) {
-    handleError(e.error, 'Error en la aplicación. Por favor recarga la página.');
-});
-
-// Prevenir zoom en dispositivos móviles (opcional)
-document.addEventListener('touchstart', function(e) {
-    if (e.touches.length > 1) {
-        e.preventDefault();
-    }
-});
-
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function(e) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-    }
-    lastTouchEnd = now;
-}, false);
 
 // Funciones para la sección de ubicación
 function openMaps() {
@@ -439,24 +326,19 @@ function copyAddress() {
 function shareTransportInfo() {
     const transportInfo = `🚌 Opciones de Transporte - Boda Ceci & Ángel
 
-📍 Lugar: Jardín Los Rosales
+📍 Lugar: Lienzo Charro "La Tapatía"
 📅 Ceremonia: 6:00 PM | Recepción: 7:00 PM
 🗺️ Dirección: Av Centenario 1100, Colinas de Tarango, Álvaro Obregón, 01620 CDMX
 
-🚇 METRO + TRANSPORTE:
-• Metro Observatorio (Línea 1) + RTP/Microbús
-• Metro Mixcoac (Línea 7/12) + RTP Ruta 57
-• Metro Tacubaya (Líneas 1/7/9) + Transporte local
+🚗 EN AUTO:
+• Estacionamiento gratuito disponible
+• Vía Periférico Sur o Av. Centenario
 
 🚌 RTP Y MICROBÚS:
 • Rutas: 57, Z2B, Z2C, 124
 
 🚖 UBER/DIDI/TAXI:
 • Opción más cómoda (25-45 min desde el centro)
-
-🚗 EN AUTO:
-• Estacionamiento gratuito disponible
-• Vía Periférico Sur o Av. Centenario
 
 ⏰ Llega 15-20 min antes de la ceremonia`;
 
@@ -522,7 +404,7 @@ function showLocationNotification(message, type = 'success') {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: ${type === 'success' ? '#4dd0c7' : '#ff6b47'};
+            background: ${type === 'success' ? '#378b85' : '#d4764f'};
             color: white;
             padding: 15px 20px;
             border-radius: 10px;
@@ -540,3 +422,109 @@ function showLocationNotification(message, type = 'success') {
         }, 3000);
     }
 }
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Asignar el evento de clic a la pantalla de splash para iniciar todo
+    if (splashScreen) {
+        splashScreen.addEventListener('click', startInvitation);
+    }
+
+    // Configurar theme toggle
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+    
+    // Configurar form handlers
+    setupFormHandlers();
+    
+    // Inicializar animaciones
+    initAnimations();
+    addFadeInUpAnimation();
+    
+    // Actualizar botón de música
+    updateMusicButton();
+    
+    console.log('Invitación de boda cargada correctamente 💕');
+});
+
+// Manejar errores globales
+window.addEventListener('error', function(e) {
+    handleError(e.error, 'Error en la aplicación. Por favor recarga la página.');
+});
+
+// Prevenir zoom en dispositivos móviles (opcional)
+document.addEventListener('touchstart', function(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+});
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(e) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+// Agregar estilos CSS para notificaciones
+(function addNotificationStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes notificationSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .notification-content p {
+            margin: 0;
+            flex: 1;
+        }
+
+        .notification-content button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .notification-content button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .notification {
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                max-width: none;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+})();

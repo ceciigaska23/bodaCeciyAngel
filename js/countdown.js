@@ -1,7 +1,7 @@
 // ===== COUNTDOWN FUNCTIONALITY =====
 
-// Fecha de la boda (30 de octubre 2026, 4:00 PM)
-const WEDDING_DATE = new Date('2026-10-30T16:00:00').getTime();
+// Fecha de la boda (30 de octubre 2026, 6:00 PM)
+const WEDDING_DATE = new Date('2026-10-30T18:00:00').getTime();
 
 // Elementos del DOM
 let daysElement, hoursElement, minutesElement, secondsElement;
@@ -47,10 +47,10 @@ function updateCountdown() {
     const seconds = Math.floor((timeDistance % (1000 * 60)) / 1000);
     
     // Actualizar elementos del DOM
-    daysElement.textContent = String(days).padStart(2, '0');
-    hoursElement.textContent = String(hours).padStart(2, '0');
-    minutesElement.textContent = String(minutes).padStart(2, '0');
-    secondsElement.textContent = String(seconds).padStart(2, '0');
+    if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
+    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
 }
 
 // ===== MOSTRAR MENSAJE DEL DÍA DE LA BODA =====
@@ -58,29 +58,49 @@ function showWeddingDay() {
     const countdownContainer = document.getElementById('countdown');
     if (countdownContainer) {
         countdownContainer.innerHTML = `
-            <div class="wedding-day-message">
-                <h3>🎉 ¡Hoy es nuestro gran día! 🎉</h3>
-                <div class="celebration-animation">
-                    <span class="celebration-icon">💒</span>
-                    <span class="celebration-icon">💍</span>
-                    <span class="celebration-icon">🎊</span>
-                    <span class="celebration-icon">💐</span>
+            <div class="wedding-day-message" style="text-align: center; color: white; z-index: 1; position: relative;">
+                <h3 style="font-size: 2rem; margin-bottom: 20px; color: white;">🎉 ¡Hoy es nuestro gran día! 🎉</h3>
+                <div class="celebration-animation" style="font-size: 3rem; margin: 20px 0; animation: celebration 2s ease-in-out infinite alternate;">
+                    <span class="celebration-icon" style="margin: 0 10px; display: inline-block; animation: bounce 1.5s ease-in-out infinite;">💒</span>
+                    <span class="celebration-icon" style="margin: 0 10px; display: inline-block; animation: bounce 1.5s ease-in-out infinite 0.2s;">💍</span>
+                    <span class="celebration-icon" style="margin: 0 10px; display: inline-block; animation: bounce 1.5s ease-in-out infinite 0.4s;">🎊</span>
+                    <span class="celebration-icon" style="margin: 0 10px; display: inline-block; animation: bounce 1.5s ease-in-out infinite 0.6s;">💐</span>
                 </div>
-                <p>¡Nos vemos en la ceremonia!</p>
+                <p style="font-size: 1.5rem; margin-top: 15px; color: white;">¡Nos vemos en la ceremonia!</p>
             </div>
         `;
+        
+        // Agregar animaciones CSS para la celebración
+        if (!document.getElementById('celebration-styles')) {
+            const style = document.createElement('style');
+            style.id = 'celebration-styles';
+            style.textContent = `
+                @keyframes celebration {
+                    0% { transform: scale(1); }
+                    100% { transform: scale(1.1); }
+                }
+                
+                @keyframes bounce {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
     }
 }
 
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', function() {
-    const mainContent = document.getElementById('invitationContainer');
-    if (mainContent && mainContent.style.display !== 'none') {
+    // Esperar a que el contenido principal sea visible antes de inicializar
+    const mainContent = document.getElementById('mainContent');
+    if (mainContent && mainContent.classList.contains('show')) {
         initCountdown();
     } else {
+        // Observar cambios en la clase show del contenido principal
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-                if (mutation.target.style.display !== 'none') {
+                if (mutation.target.classList.contains('show')) {
                     initCountdown();
                     observer.disconnect();
                 }
@@ -90,8 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mainContent) {
             observer.observe(mainContent, { 
                 attributes: true, 
-                attributeFilter: ['style'] 
+                attributeFilter: ['class'] 
             });
+        } else {
+            // Fallback: inicializar después de un retraso
+            setTimeout(initCountdown, 2000);
         }
     }
 });

@@ -208,7 +208,7 @@
                                 acompañantes.</p>
 
                             <div id="companionsList">
-                                </div>
+                            </div>
 
                             <button type="button" class="btn btn-secondary" id="addCompanionBtn"
                                 onclick="addCompanion()">
@@ -236,7 +236,7 @@
                 <p>Puedes escanear el código QR para ver las opciones de regalos:</p>
                 <div class="qr-code-container">
                     <div id="qrcode-container"></div>
-                    <a href="URL_DEL_DRIVE_DE_REGALOS" target="_blank" class="btn main-btn">
+                    <a href="https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD" target="_blank" class="btn main-btn">
                         Ver Lista de Regalos
                     </a>
                 </div>
@@ -245,9 +245,12 @@
             <div class="invitation-card">
                 <h2 class="section-title">📸 Drive de Fotos</h2>
                 <p>Comparte tus momentos especiales. Sube las fotos de la boda a nuestro Drive compartido.</p>
-                <a href="URL_DEL_DRIVE_DE_FOTOS" target="_blank" class="btn main-btn">
-                    Subir Fotos
-                </a>
+                <div class="qr-code-container">
+                    <div id="qrcode-photos"></div>
+                    <a href="https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD" target="_blank" class="btn main-btn">
+                        Subir Fotos
+                    </a>
+                </div>
             </div>
 
             <div class="footer">
@@ -268,16 +271,30 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const qrCodeUrl = "URL_DEL_DRIVE_DE_REGALOS"; // Reemplaza con tu URL
+            const qrCodeUrl = "https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD";
             const qrcodeContainer = document.getElementById("qrcode-container");
+            const qrcodePhotos = document.getElementById("qrcode-photos");
 
-            if (qrcodeContainer) {
+            // QR para regalos
+            if (qrcodeContainer && typeof QRCode !== 'undefined') {
                 new QRCode(qrcodeContainer, {
                     text: qrCodeUrl,
                     width: 150,
                     height: 150,
-                    colorDark: "#3e2815", // Marrón para el código QR
-                    colorLight: "#faf7f2", // Crema para el fondo
+                    colorDark: "#378b85", // Teal oscuro de la paleta
+                    colorLight: "#fdf8f0", // Crema claro
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+
+            // QR para fotos
+            if (qrcodePhotos && typeof QRCode !== 'undefined') {
+                new QRCode(qrcodePhotos, {
+                    text: qrCodeUrl,
+                    width: 150,
+                    height: 150,
+                    colorDark: "#378b85", // Teal oscuro de la paleta
+                    colorLight: "#fdf8f0", // Crema claro
                     correctLevel: QRCode.CorrectLevel.H
                 });
             }
