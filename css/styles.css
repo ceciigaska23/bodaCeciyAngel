@@ -32,6 +32,14 @@
     --countdown-unit-text-light: white;
     --countdown-label-text-light: rgba(255, 255, 255, 0.8);
     --countdown-unit-border-light: rgba(255, 255, 255, 0.3);
+
+    /* Paleta de colores para el tema claro */
+    --primary-color: #fdf8f0;   /* Crema claro */
+    --secondary-color: #d8c2b4; /* Café claro */
+    --accent-color: #4dd0c7;    /* Teal brillante */
+    --dark-color: #378b85;      /* Teal oscuro */
+    --color-light: #fdf8f0;
+    --color-dark: #378b85;
 }
 
 /* Tema Oscuro */
@@ -51,6 +59,14 @@
     --countdown-unit-text-light: #fefefe;
     --countdown-label-text-light: rgba(255, 255, 255, 0.7);
     --countdown-unit-border-light: rgba(255, 255, 255, 0.2);
+
+    /* Paleta de colores para el tema oscuro */
+    --primary-color: #1a1a1a;
+    --secondary-color: #444444;
+    --accent-color-dark: #378b85;
+    --dark-color: #fdf8f0;
+    --color-light: #fdf8f0;
+    --color-dark: #1a1a1a;
 }
 
 /* ===== FONT IMPORTS ===== */
@@ -830,16 +846,16 @@ body {
 
 .btn {
     display: inline-block;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    text-decoration: none;
+    padding: 12px 28px;
+    font-size: 1rem;
     font-weight: 600;
-    text-transform: uppercase;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Quicksand', sans-serif;
-    border: none;
     text-align: center;
+    text-decoration: none;
+    border-radius: 50px; /* Borde más redondeado para un look elegante */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    border: 2px solid transparent; /* Borde transparente para efecto de borde */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
 }
 
 .btn:hover {
@@ -867,12 +883,20 @@ body {
 }
 
 .main-btn {
-    background: linear-gradient(45deg, var(--primary-color-light), var(--secondary-color-light));
-    color: white;
+    color: var(--color-light); /* Color de texto claro */
+    background-color: var(--accent-color); /* Color de acento de la paleta */
 }
 
+/* Efecto al pasar el cursor */
 .main-btn:hover {
-    box-shadow: 0 8px 20px var(--shadow-color-light);
+    transform: translateY(-3px); /* Pequeña elevación */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+/* Ajustes para el tema oscuro */
+body[data-theme="dark"] .main-btn {
+    color: var(--color-dark);
+    background-color: var(--accent-color-dark);
 }
 
 .companions-info {
@@ -918,4 +942,59 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.secondary-btn {
+    color: var(--accent-color); /* Color de acento en el texto */
+    background-color: transparent;
+    border-color: var(--accent-color); /* El color del borde coincide con el texto */
+}
+
+/* Efecto al pasar el cursor */
+.secondary-btn:hover {
+    background-color: var(--accent-color); /* El fondo se rellena con el color de acento */
+    color: var(--color-light); /* El texto se vuelve claro */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajustes para el tema oscuro */
+[data-theme="dark"] .secondary-btn {
+    color: var(--accent-color-dark);
+    border-color: var(--accent-color-dark);
+}
+
+[data-theme="dark"] .secondary-btn:hover {
+    background-color: var(--accent-color-dark);
+    color: var(--color-dark);
+}
+
+/* Nuevo estilo para los grupos de inputs de acompañantes */
+.companion-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Permite que los elementos se apilen en móviles */
+    align-items: center;
+}
+
+/* Estilo para el campo de nombre de solo lectura */
+.companion-input-group input[name="companionName[]"][readonly] {
+    background-color: var(--cream-dark); /* Un color de fondo más oscuro */
+    border: 1px solid var(--border-color-light);
+    color: var(--text-color-light);
+    cursor: default; /* Indica que no se puede editar */
+    font-weight: 600; /* Hace que el texto resalte un poco más */
+}
+
+/* Asegura que los selects también se vean bien en el grupo */
+.companion-input-group select {
+    flex-grow: 1; /* Permite que los selects se expandan */
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .companion-input-group {
+        flex-direction: column;
+    }
 }

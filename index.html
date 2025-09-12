@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ceci & Ángel - Nuestra Boda</title>
+    <title>Ángel & Ceci - Nuestra Boda</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +20,9 @@
     <div id="splashScreen" class="splash-screen">
         <div class="splash-content">
             <div class="wedding-rings">💍</div>
-            <h1 class="splash-title">Ceci & Ángel</h1>
-            <p class="splash-subtitle">Te invitamos a nuestra boda</p>
-            <p class="splash-hint">Toca para comenzar con música</p>
+            <h1 class="splash-title">Ángel & Ceci</h1>
+            <p class="splash-subtitle">¡Nos casamos!</p>
+            <p class="splash-hint">30.10.2026</p>
         </div>
         <div class="splash-background"></div>
     </div>
@@ -35,6 +35,7 @@
     <div id="mainContent" class="main-content" style="display: none;">
         <div class="container">
             <button id="themeToggle" class="theme-toggle-btn">🌙</button>
+            <!-- <button class="icon-btn" id="musicToggle" title="Reproducir música">🎵</button> -->
 
             <div class="invitation-card">
                 <div class="header">
@@ -42,18 +43,18 @@
                         <img src="assets/images/couple-photo.jpg" alt="Ceci y Ángel"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="couple-placeholder" style="display: none;">
-                            💕<br>Ceci & Ángel
+                            💕<br>Ángel & Ceci
                         </div>
                     </div>
-                    <h1 class="couple-names">Ceci & Ángel</h1>
+                    <h1 class="couple-names">Ángel & Ceci</h1>
                     <p class="wedding-announcement">
-                        ¡Nos casamos!
+                        ¡Con el corazón lleno de alegría, los invitamos a compartir la celebración de nuestro amor!
                     </p>
                 </div>
 
                 <div class="love-story">
                     <h3>💕 Nuestra Historia</h3>
-                    <p>Nuestra historia comenzó en 2022, de la manera más inesperada. Aunque el destino nos unió, la
+                    <p>Esta historia comenzó en 2022, de la manera más inesperada. Aunque el destino nos unió, la
                         vida nos puso a prueba, y nos distanciamos por un tiempo. Pero ese breve adiós no fue un final,
                         sino una pausa necesaria para descubrir lo que realmente queríamos.</p>
                     <p>Fue en mayo de 2025 cuando
@@ -121,11 +122,15 @@
                                 Álvaro Obregón, 01620<br>
                                 Ciudad de México, CDMX
                             </p>
+                            <button type="button" class="btn secondary-btn" onclick="copyAddress()">
+                                Copiar Dirección
+                            </button>
                         </div>
 
                         <div class="map-container">
-                            <iframe src="https://www.google.com/maps?ll=19.363949,-99.220947&z=16&t=m&hl=es-419&gl=MX&mapclient=embed&cid=7209173288837553955" width="100%" height="400"
-                                style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6330.474576100897!2d-99.22154704157212!3d19.363838941729956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d200448408c8b5%3A0x640c20e90d659f23!2sLienzo%20Charro%20La%20Tapatia!5e0!3m2!1ses!2smx!4v1757623053781!5m2!1ses!2smx"
+                                width="100" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
@@ -133,31 +138,36 @@
                             <div class="info-card">
                                 <div class="info-icon">🚗</div>
                                 <h4>En Auto</h4>
-                                <p>Estacionamiento gratuito disponible<br> <small>Vía Periférico Sur o Av. Centenario</small> </p>
+                                <p>Estacionamiento gratuito disponible<br> <small>Vía Periférico Sur o Av.
+                                        Centenario</small> </p>
                             </div>
                             <div class="info-card transport-card">
                                 <div class="info-icon">🚌</div>
                                 <h4>RTP y Microbús</h4>
                                 <p>Rutas directas: 57, Z2B, Z2C, 124<br>
-                                    <small>Desde diferentes puntos de la ciudad</small></p>
+                                    <small>Desde diferentes puntos de la ciudad</small>
+                                </p>
                             </div>
                             <div class="info-card">
                                 <div class="info-icon">🚖</div>
                                 <h4>Uber/DiDi/Taxi</h4>
                                 <p>Opción más cómoda y directa<br>
-                                    <small>Aproximadamente 25-45 min desde el centro</small></p>
+                                    <small>Aproximadamente 25-45 min desde el centro</small>
+                                </p>
                             </div>
                             <div class="info-card">
                                 <div class="info-icon">⏰</div>
                                 <h4>Tiempo de Viaje</h4>
                                 <p>Llega 15-20 min antes de la ceremonia<br>
-                                    <small>Considera tráfico de fin de semana</small></p>
+                                    <small>Considera tráfico de fin de semana</small>
+                                </p>
                             </div>
                             <div class="info-card future-transport">
                                 <div class="info-icon">🚠</div>
                                 <h4>Próximamente</h4>
                                 <p>Cablebús Línea 5 conectará con Metro Mixcoac<br>
-                                    <small>En construcción - disponible en 2026</small></p>
+                                    <small>En construcción - disponible en 2026</small>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -170,7 +180,6 @@
                     <div class="guest-search-section">
                         <h4>Buscar mi invitación</h4>
                         <div class="form-group">
-                            <label for="searchName">Busca tu nombre como aparece en la invitación:</label>
                             <input type="text" id="searchName" name="searchName" placeholder="Ej: Juan Pérez">
                             <button type="button" class="btn" onclick="searchGuest()">Buscar</button>
                         </div>
@@ -182,17 +191,6 @@
                             <label for="guestName">Nombre completo del invitado principal *</label>
                             <input type="text" id="guestName" name="guestName" readonly>
                         </div>
-
-                        <div class="form-group">
-                            <label for="email">Correo electrónico *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-
                         <div class="form-group">
                             <label for="attendance">¿Confirmas tu asistencia? *</label>
                             <select id="attendance" name="attendance" required>
@@ -233,12 +231,22 @@
                 <h2 class="section-title">🎁 Mesa de Regalos</h2>
                 <p>Tu presencia es nuestro mejor regalo. Sin embargo, si deseas contribuir a nuestra nueva vida, te
                     agradecemos de corazón.</p>
-                <p>Puedes escanear el código QR para ver las opciones de regalos:</p>
-                <div class="qr-code-container">
-                    <div id="qrcode-container"></div>
-                    <a href="https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD" target="_blank" class="btn main-btn">
-                        Ver Lista de Regalos
-                    </a>
+
+                <div class="gifts-list-container">
+                    <h4>Opciones para hacer un regalo:</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.amazon.com.mx/wedding/share/AngelyCeci" target="_blank"
+                                class="btn main-btn">
+                                Lista de Bodas en Amazon
+                            </a>
+                        </li>
+                        <li>
+                            <a href="URL_DEL_OTRO_ENLACE" target="_blank" class="btn main-btn">
+                                Otra Opción de Regalo
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -247,14 +255,15 @@
                 <p>Comparte tus momentos especiales. Sube las fotos de la boda a nuestro Drive compartido.</p>
                 <div class="qr-code-container">
                     <div id="qrcode-photos"></div>
-                    <a href="https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD" target="_blank" class="btn main-btn">
+                    <a href="https://drive.google.com/drive/folders/1LSnA-UfwqhEobzkuATcTOKlB_2an2cFD" target="_blank"
+                        class="btn main-btn">
                         Subir Fotos
                     </a>
                 </div>
             </div>
 
             <div class="footer">
-                <p>© 2026 Ceci & Ángel. Todos los derechos reservados.</p>
+                <p>© 2026 Ángel & Ceci. Todos los derechos reservados.</p>
                 <div class="footer-buttons">
                     <button class="btn music-toggle-btn" id="musicToggle" onclick="toggleMusic()">🎵</button>
                 </div>
@@ -275,18 +284,6 @@
             const qrcodeContainer = document.getElementById("qrcode-container");
             const qrcodePhotos = document.getElementById("qrcode-photos");
 
-            // QR para regalos
-            if (qrcodeContainer && typeof QRCode !== 'undefined') {
-                new QRCode(qrcodeContainer, {
-                    text: qrCodeUrl,
-                    width: 150,
-                    height: 150,
-                    colorDark: "#378b85", // Teal oscuro de la paleta
-                    colorLight: "#fdf8f0", // Crema claro
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-
             // QR para fotos
             if (qrcodePhotos && typeof QRCode !== 'undefined') {
                 new QRCode(qrcodePhotos, {
@@ -301,4 +298,5 @@
         });
     </script>
 </body>
+
 </html>
