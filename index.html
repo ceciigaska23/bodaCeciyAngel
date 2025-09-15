@@ -180,10 +180,12 @@
                     <div class="guest-search-section">
                         <h4>Buscar mi invitación</h4>
                         <div class="form-group">
-                            <input type="text" id="searchName" name="searchName" placeholder="Ej: Juan Pérez">
-                            <button type="button" class="btn" onclick="searchGuest()">Buscar</button>
+                            <label for="searchName">Ingresa tu nombre completo:</label>
+                            <input type="text" id="searchName" name="searchName" placeholder="Ej: Juan Pérez García">
+                            <!-- CAMBIO: Remover onclick y usar addEventListener -->
+                            <button type="button" id="searchButton" class="btn main-btn">Buscar</button>
                         </div>
-                        <div id="searchResult" class="search-result"></div>
+                        <div id="searchResult" class="search-result" style="display: none;"></div>
                     </div>
 
                     <form id="confirmationForm" style="display: none;">
@@ -208,8 +210,8 @@
                             <div id="companionsList">
                             </div>
 
-                            <button type="button" class="btn btn-secondary" id="addCompanionBtn"
-                                onclick="addCompanion()">
+                            <!-- CAMBIO: Remover onclick y usar addEventListener -->
+                            <button type="button" class="btn btn-secondary" id="addCompanionBtn">
                                 Agregar Acompañante
                             </button>
                         </div>
@@ -271,9 +273,6 @@
         </div>
     </div>
 
-    <script>
-        const SEARCH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1qWvbXP8eOGCQ3kJcF2dfKdfPjsKLzmn6rs7AHAceEMkNzlwLLyZCT3Z0W6dWhKWj/exec';
-    </script>
     <script src="js/main.js"></script>
     <script src="js/form-handler.js"></script>
     <script src="js/countdown.js"></script>
