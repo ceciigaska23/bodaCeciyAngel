@@ -468,26 +468,29 @@ function validateWeddingFormData(data) {
   return true;
 }
 
-// ===== FUNCIÓN showWeddingSuccessMessage - VERSIÓN FINAL =====
-function showWeddingSuccessMessage(result, whatsappUrl) {
-  const searchResult = document.getElementById("searchResult");
+// ===== FUNCIÓN showWeddingSuccessMessage - VERSIÓN FINAL Y CORREGIDA =====
+function showWeddingSuccessMessage(result) {
   const confirmationForm = document.getElementById('confirmationForm');
+  const searchResult = document.getElementById('searchResult');
 
-  // Asegúrate de que los elementos existen antes de manipularlos
+  // Asegúrate de que los elementos del DOM existen antes de manipularlos
   if (!confirmationForm || !searchResult) {
     console.error("Error: Elementos del DOM no encontrados (confirmationForm o searchResult)");
     return;
   }
 
-  // Oculta el formulario y muestra el contenedor de resultados
-  confirmationForm.style.display = 'none';
-  searchResult.style.display = 'block';
-
-  // Usa las propiedades del objeto 'result'
+  // Extrae la información de la respuesta del servidor
   const confirmationNumber = result.confirmationNumber || 'No disponible';
-  const whatsappButton = whatsappUrl ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` : '';
+  const whatsappUrl = result.whatsappUrl;
 
-  // Genera el HTML de éxito
+  // Oculta el formulario principal
+  confirmationForm.style.display = 'none';
+
+  // Genera el HTML de éxito incluyendo el número de confirmación y el botón de WhatsApp
+  const whatsappButton = whatsappUrl 
+    ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` 
+    : '';
+
   searchResult.innerHTML = `
     <div class="success-message">
       <div class="success-icon">🎉</div>
@@ -502,6 +505,10 @@ function showWeddingSuccessMessage(result, whatsappUrl) {
   `;
 
   searchResult.className = "search-result success";
+  searchResult.style.display = "block";
+
+  // Muestra una notificación de éxito
+  showWeddingNotification("¡Confirmación enviada! 🎉", "success");
 }
 
 async function testWeddingBackend() {
