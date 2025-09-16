@@ -469,8 +469,7 @@ function validateWeddingFormData(data) {
 }
 
 function showWeddingSuccessMessage(message, whatsappUrl) {
-  // Oculta el formulario y muestra la tarjeta de éxito
-  document.getElementById('formContainer').style.display = 'none';
+  document.getElementById('confirmationForm').style.display = 'none'; // ✅ ESTA ES LA CORRECCIÓN
   document.getElementById('successCard').style.display = 'block';
   
   // Aquí está la corrección: ahora puedes usar whatsappUrl
