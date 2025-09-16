@@ -404,7 +404,7 @@ function setupWeddingFormSubmission() {
         console.log('📄 Resultado:', result);
 
         if (result.success) {
-          showWeddingSuccessMessage(result.confirmationNumber || 'N/A');
+          showWeddingSuccessMessage(result.message, result.whatsappUrl);
         } else {
           throw new Error(result.error || 'Error desconocido');
         }
