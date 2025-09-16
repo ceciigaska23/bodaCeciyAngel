@@ -468,9 +468,13 @@ function validateWeddingFormData(data) {
   return true;
 }
 
-function showWeddingSuccessMessage(confirmationNumber) {
-  const searchResult = document.getElementById("searchResult");
-  const confirmationForm = document.getElementById("confirmationForm");
+function showWeddingSuccessMessage(message, whatsappUrl) {
+  // Oculta el formulario y muestra la tarjeta de éxito
+  document.getElementById('formContainer').style.display = 'none';
+  document.getElementById('successCard').style.display = 'block';
+  
+  // Aquí está la corrección: ahora puedes usar whatsappUrl
+  document.getElementById('whatsappButton').href = whatsappUrl;
 
   // Añadir un botón de WhatsApp
   const whatsappButton = whatsappUrl ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` : '';
