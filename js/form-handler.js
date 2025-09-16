@@ -3,8 +3,11 @@
 // Configuración para Vercel - CAMBIA ESTA URL POR TU DOMINIO DE VERCEL
 const getBackendUrl = () => {
   // Si estamos en localhost, usar el backend local (o el puerto que uses)
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:3000'; 
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  ) {
+    return "http://localhost:3000";
   }
   // Si no, usar la URL de producción de Vercel
   return "https://boda-cecily-angel-backend.vercel.app";
@@ -17,7 +20,7 @@ let weddingCurrentGuest = null;
 let weddingMaxCompanions = 0;
 
 // ===== DEFINIR FUNCIONES GLOBALES INMEDIATAMENTE =====
-window.searchGuest = async function() {
+window.searchGuest = async function () {
   const searchInput = document.getElementById("searchName");
   const searchButton = document.getElementById("searchButton");
   const guestName = searchInput.value.trim();
@@ -31,34 +34,39 @@ window.searchGuest = async function() {
   searchButton.disabled = true;
 
   try {
-    const response = await fetch(`${WEDDING_BACKEND_URL}/api/search?name=${encodeURIComponent(guestName)}`);
+    const response = await fetch(
+      `${WEDDING_BACKEND_URL}/api/search?name=${encodeURIComponent(guestName)}`
+    );
     const result = await response.json();
-    
-    console.log('📄 Respuesta de la búsqueda:', result);
+
+    console.log("📄 Respuesta de la búsqueda:", result);
 
     if (result.found) {
-      hideWeddingNotification(); 
+      hideWeddingNotification();
       // Esta línea es CRUCIAL. Pasa los datos del invitado a la siguiente función.
-      handleWeddingGuestFound(result.guest); 
+      handleWeddingGuestFound(result.guest);
     } else {
-      showWeddingNotification(result.message || "Invitado no encontrado. Por favor, revisa el nombre.", "error");
+      showWeddingNotification(
+        result.message ||
+          "Invitado no encontrado. Por favor, revisa el nombre.",
+        "error"
+      );
     }
-
   } catch (error) {
-    console.error('❌ Error en la búsqueda:', error);
+    console.error("❌ Error en la búsqueda:", error);
     showWeddingNotification(`Error en la búsqueda: ${error.message}`, "error");
   } finally {
     searchButton.disabled = false;
   }
 };
 
-window.addCompanion = function() {
-  console.log('➕ Función addCompanion ejecutada');
+window.addCompanion = function () {
+  console.log("➕ Función addCompanion ejecutada");
   addWeddingCompanionField();
 };
 
-window.removeCompanionField = function(button) {
-  console.log('➖ Función removeCompanionField ejecutada');
+window.removeCompanionField = function (button) {
+  console.log("➖ Función removeCompanionField ejecutada");
   if (button && button.parentElement) {
     button.parentElement.remove();
     updateWeddingAddCompanionButton();
@@ -68,30 +76,35 @@ window.removeCompanionField = function(button) {
 
 // ===== FUNCIONES INTERNAS =====
 
-function addWeddingCompanionField(name = '', readonly = false) {
+function addWeddingCompanionField(name = "", readonly = false) {
   const companionsList = document.getElementById("companionsList");
   if (!companionsList) {
-    console.error('❌ Lista de acompañantes no encontrada');
+    console.error("❌ Lista de acompañantes no encontrada");
     return;
   }
-  
-  const currentCount = companionsList.querySelectorAll('.companion-input-group').length;
-  
+
+  const currentCount = companionsList.querySelectorAll(
+    ".companion-input-group"
+  ).length;
+
   if (currentCount >= weddingMaxCompanions) {
-    showWeddingNotification(`Solo puedes agregar hasta ${weddingMaxCompanions} acompañantes.`, "error");
+    showWeddingNotification(
+      `Solo puedes agregar hasta ${weddingMaxCompanions} acompañantes.`,
+      "error"
+    );
     return;
   }
 
   const companionDiv = document.createElement("div");
   companionDiv.className = "companion-input-group";
-  
+
   companionDiv.innerHTML = `
     <input 
       type="text" 
       name="companionName[]" 
       placeholder="Nombre del acompañante" 
       value="${name}"
-      ${readonly ? 'readonly' : ''}
+      ${readonly ? "readonly" : ""}
       required
     >
     <div class="attendance-radio">
@@ -103,9 +116,13 @@ function addWeddingCompanionField(name = '', readonly = false) {
       <option value="adulto">Adulto</option>
       <option value="nino">Niño</option>
     </select>
-    ${!readonly ? '<button type="button" class="remove-companion-btn" onclick="window.removeCompanionField(this)">×</button>' : ''}
+    ${
+      !readonly
+        ? '<button type="button" class="remove-companion-btn" onclick="window.removeCompanionField(this)">×</button>'
+        : ""
+    }
   `;
-  
+
   companionsList.appendChild(companionDiv);
   updateWeddingAddCompanionButton();
 }
@@ -113,24 +130,26 @@ function addWeddingCompanionField(name = '', readonly = false) {
 function updateWeddingAddCompanionButton() {
   const companionsList = document.getElementById("companionsList");
   const addCompanionBtn = document.getElementById("addCompanionBtn");
-  
+
   if (!companionsList || !addCompanionBtn) return;
-  
-  const currentCount = companionsList.querySelectorAll('.companion-input-group').length;
-  
+
+  const currentCount = companionsList.querySelectorAll(
+    ".companion-input-group"
+  ).length;
+
   if (currentCount >= weddingMaxCompanions) {
-    addCompanionBtn.style.display = 'none';
+    addCompanionBtn.style.display = "none";
   } else {
-    addCompanionBtn.style.display = 'block';
+    addCompanionBtn.style.display = "block";
   }
 }
 
 function renumberWeddingCompanions() {
-  const companionGroups = document.querySelectorAll('.companion-input-group');
+  const companionGroups = document.querySelectorAll(".companion-input-group");
   companionGroups.forEach((group, index) => {
     const radios = group.querySelectorAll('input[type="radio"]');
-    radios.forEach(radio => {
-      const baseName = radio.name.split('[')[0];
+    radios.forEach((radio) => {
+      const baseName = radio.name.split("[")[0];
       radio.name = `${baseName}[${index}]`;
     });
   });
@@ -140,9 +159,9 @@ function renumberWeddingCompanions() {
 function handleWeddingGuestFound(guestData) {
   const searchResult = document.getElementById("searchResult");
   const confirmationForm = document.getElementById("confirmationForm");
-  
-  console.log('✅ Invitado encontrado:', guestData);
-  
+
+  console.log("✅ Invitado encontrado:", guestData);
+
   weddingCurrentGuest = guestData;
   weddingMaxCompanions = guestData.maxCompanions || 0;
 
@@ -153,9 +172,10 @@ function handleWeddingGuestFound(guestData) {
       <h4>¡Invitado encontrado!</h4>
       <div class="guest-info">
         <p><strong>Nombre:</strong> ${guestData.name}</p>
-        ${weddingMaxCompanions > 0 
-          ? `<p><strong>Acompañantes permitidos:</strong> ${weddingMaxCompanions}</p>` 
-          : "<p><strong>Invitación individual</strong></p>"
+        ${
+          weddingMaxCompanions > 0
+            ? `<p><strong>Acompañantes permitidos:</strong> ${weddingMaxCompanions}</p>`
+            : "<p><strong>Invitación individual</strong></p>"
         }
       </div>
     </div>
@@ -168,8 +188,8 @@ function handleWeddingGuestFound(guestData) {
   setupWeddingCompanions(guestData);
 
   if (confirmationForm) {
-    confirmationForm.style.display = 'block';
-    confirmationForm.scrollIntoView({ behavior: 'smooth' });
+    confirmationForm.style.display = "block";
+    confirmationForm.scrollIntoView({ behavior: "smooth" });
   }
 }
 
@@ -180,7 +200,7 @@ function fillWeddingFormData(guestData) {
 
   if (guestNameInput) {
     guestNameInput.value = guestData.name;
-    guestNameInput.setAttribute('data-guest-id', guestData.id);
+    guestNameInput.setAttribute("data-guest-id", guestData.id);
   }
 
   // Pre-llenar notas especiales si existen
@@ -192,22 +212,22 @@ function fillWeddingFormData(guestData) {
 // ===== FUNCIÓN: CONFIGURA Y LLENA LOS CAMPOS DE ACOMPAÑANTES =====
 function setupWeddingCompanions(guestData) {
   const companionsContainer = document.getElementById("companionsList");
-  
+
   if (!companionsContainer) {
-    console.error('❌ Contenedor de acompañantes no encontrado');
+    console.error("❌ Contenedor de acompañantes no encontrado");
     return;
   }
-  
-  companionsContainer.innerHTML = '';
+
+  companionsContainer.innerHTML = "";
 
   if (guestData.maxCompanions > 0) {
     const companionsToFill = guestData.companions || [];
 
     for (let i = 0; i < guestData.maxCompanions; i++) {
       const companionData = companionsToFill[i] || {};
-      const companionName = companionData.name || '';
-      const companionAttendance = companionData.attendance || 'si';
-      const companionAge = companionData.age || 'adulto';
+      const companionName = companionData.name || "";
+      const companionAttendance = companionData.attendance || "si";
+      const companionAge = companionData.age || "adulto";
 
       const companionHtml = `
         <div class="form-group companion-input-group">
@@ -218,13 +238,21 @@ function setupWeddingCompanions(guestData) {
             placeholder="Nombre completo" 
             value="${companionName}">
           <div class="companion-attendance">
-            <label><input type="radio" name="companionAttendance[${i}]" value="si" ${companionAttendance === 'si' ? 'checked' : ''}> Asistirá</label>
-            <label><input type="radio" name="companionAttendance[${i}]" value="no" ${companionAttendance === 'no' ? 'checked' : ''}> No Asistirá</label>
+            <label><input type="radio" name="companionAttendance[${i}]" value="si" ${
+        companionAttendance === "si" ? "checked" : ""
+      }> Asistirá</label>
+            <label><input type="radio" name="companionAttendance[${i}]" value="no" ${
+        companionAttendance === "no" ? "checked" : ""
+      }> No Asistirá</label>
           </div>
           <div class="companion-age">
             <select name="companionAge[]">
-              <option value="adulto" ${companionAge === 'adulto' ? 'selected' : ''}>Adulto</option>
-              <option value="nino" ${companionAge === 'nino' ? 'selected' : ''}>Niño</option>
+              <option value="adulto" ${
+                companionAge === "adulto" ? "selected" : ""
+              }>Adulto</option>
+              <option value="nino" ${
+                companionAge === "nino" ? "selected" : ""
+              }>Niño</option>
             </select>
           </div>
         </div>
@@ -252,7 +280,6 @@ function addCompanionField(index) {
   companionsContainer.appendChild(companionField);
 }
 
-
 function handleWeddingGuestNotFound(message) {
   const searchResult = document.getElementById("searchResult");
   searchResult.innerHTML = `
@@ -268,8 +295,12 @@ function handleWeddingGuestNotFound(message) {
 }
 
 function hideWeddingForms() {
-  const elementsToHide = ["searchResult", "confirmationForm", "companionsSection"];
-  elementsToHide.forEach(id => {
+  const elementsToHide = [
+    "searchResult",
+    "confirmationForm",
+    "companionsSection",
+  ];
+  elementsToHide.forEach((id) => {
     const el = document.getElementById(id);
     if (el) {
       el.style.display = "none";
@@ -281,44 +312,44 @@ function hideWeddingForms() {
 // ===== CONFIGURACIÓN DE EVENTOS =====
 function initWeddingFormHandler() {
   console.log("🎯 Inicializando Wedding Form Handler...");
-  
+
   setupWeddingSearch();
   setupWeddingFormSubmission();
   setupWeddingAttendance();
   setupWeddingAddCompanionButton();
-  
+
   console.log("✅ Wedding Form Handler inicializado");
   console.log("🌐 Backend URL:", WEDDING_BACKEND_URL);
-  
+
   testWeddingBackend();
 }
 
 function setupWeddingSearch() {
   const searchInput = document.getElementById("searchName");
   const searchButton = document.getElementById("searchButton");
-  
+
   if (searchInput) {
     console.log("✅ Input de búsqueda encontrado");
-    
-    searchInput.addEventListener("keypress", function(e) {
+
+    searchInput.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
         e.preventDefault();
         console.log("⌨️ Enter presionado en búsqueda");
         window.searchGuest();
       }
     });
-    
-    searchInput.addEventListener("input", function() {
+
+    searchInput.addEventListener("input", function () {
       hideWeddingForms();
     });
   } else {
     console.error("❌ Input de búsqueda NO encontrado");
   }
-  
+
   if (searchButton) {
     console.log("✅ Botón de búsqueda encontrado");
-    
-    searchButton.addEventListener("click", function(e) {
+
+    searchButton.addEventListener("click", function (e) {
       e.preventDefault();
       console.log("🖱️ Botón de búsqueda clickeado");
       window.searchGuest();
@@ -331,7 +362,7 @@ function setupWeddingSearch() {
 function setupWeddingAttendance() {
   const attendanceSelect = document.getElementById("attendance");
   if (attendanceSelect) {
-    attendanceSelect.addEventListener("change", function() {
+    attendanceSelect.addEventListener("change", function () {
       const companionsSection = document.getElementById("companionsSection");
       if (this.value === "si" && weddingMaxCompanions > 0) {
         companionsSection.style.display = "block";
@@ -350,13 +381,15 @@ function setupWeddingAddCompanionButton() {
   const addCompanionBtn = document.getElementById("addCompanionBtn");
   if (addCompanionBtn) {
     console.log("✅ Botón agregar acompañante encontrado");
-    addCompanionBtn.addEventListener("click", function(e) {
+    addCompanionBtn.addEventListener("click", function (e) {
       e.preventDefault();
       console.log("🖱️ Botón agregar acompañante clickeado");
       window.addCompanion();
     });
   } else {
-    console.log("⚠️ Botón agregar acompañante NO encontrado (se agregará después)");
+    console.log(
+      "⚠️ Botón agregar acompañante NO encontrado (se agregará después)"
+    );
   }
 }
 
@@ -364,36 +397,35 @@ function setupWeddingFormSubmission() {
   const confirmationForm = document.getElementById("confirmationForm");
 
   if (confirmationForm) {
-    confirmationForm.addEventListener("submit", async function(event) {
+    confirmationForm.addEventListener("submit", async function (event) {
       event.preventDefault();
-      
+
       if (weddingFormSubmitting) {
-        console.log('⚠️ Envío ya en progreso');
+        console.log("⚠️ Envío ya en progreso");
         return;
       }
-      
+
       weddingFormSubmitting = true;
 
-      const submitButton = confirmationForm.querySelector('button[type="submit"]');
+      const submitButton = confirmationForm.querySelector(
+        'button[type="submit"]'
+      );
       const originalText = submitButton.textContent;
       submitButton.textContent = "Enviando...";
       submitButton.disabled = true;
 
       try {
         const formData = collectWeddingFormData();
-        console.log('📝 Datos a enviar:', formData);
+        console.log("📝 Datos a enviar:", formData);
 
         if (!validateWeddingFormData(formData)) {
-          throw new Error('Datos del formulario inválidos');
+          throw new Error("Datos del formulario inválidos");
         }
 
-        const response = await fetch(`${WEDDING_BACKEND_URL}/api/submit`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(formData)
+        const response = await fetch(WEDDING_BACKEND_URL + "/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
         });
 
         if (!response.ok) {
@@ -401,16 +433,16 @@ function setupWeddingFormSubmission() {
         }
 
         const result = await response.json();
-        console.log('📄 Resultado:', result);
+        console.log("📄 Resultado:", result);
 
         if (result.success) {
-          showWeddingSuccessMessage(result.message, result.whatsappUrl);
+          showWeddingSuccessMessage(result);
         } else {
-          throw new Error(result.error || 'Error desconocido');
+          console.error("❌ Error enviando formulario:", result.error);
+          showWeddingNotification(`❌ Error: ${result.error}`, "error");
         }
-
       } catch (error) {
-        console.error('❌ Error enviando formulario:', error);
+        console.error("❌ Error enviando formulario:", error);
         showWeddingNotification(`Error: ${error.message}`, "error");
       } finally {
         weddingFormSubmitting = false;
@@ -428,65 +460,70 @@ function collectWeddingFormData() {
   const phoneInput = document.getElementById("phone");
 
   const companions = [];
-  const companionGroups = document.querySelectorAll('.companion-input-group');
-  
-  companionGroups.forEach(group => {
+  const companionGroups = document.querySelectorAll(".companion-input-group");
+
+  companionGroups.forEach((group) => {
     const nameInput = group.querySelector('input[name="companionName[]"]');
     const attendanceInput = group.querySelector('input[type="radio"]:checked');
     const ageSelect = group.querySelector('select[name="companionAge[]"]');
-    
+
     if (nameInput && nameInput.value.trim()) {
       companions.push({
         name: nameInput.value.trim(),
-        attendance: attendanceInput ? attendanceInput.value : 'no',
-        age: ageSelect ? ageSelect.value : 'adulto'
+        attendance: attendanceInput ? attendanceInput.value : "no",
+        age: ageSelect ? ageSelect.value : "adulto",
       });
     }
   });
 
   return {
-    id: guestNameInput.getAttribute('data-guest-id') || weddingCurrentGuest?.id,
+    id: guestNameInput.getAttribute("data-guest-id") || weddingCurrentGuest?.id,
     name: guestNameInput.value.trim(),
     phone: phoneInput.value.trim(),
     attendance: attendanceSelect.value,
-    dietary: dietaryTextarea.value.trim() || '',
-    companions: companions
+    dietary: dietaryTextarea.value.trim() || "",
+    companions: companions,
   };
 }
 
 function validateWeddingFormData(data) {
   if (!data.id || !data.name || !data.attendance) {
-    showWeddingNotification('Faltan datos requeridos', 'error');
+    showWeddingNotification("Faltan datos requeridos", "error");
     return false;
   }
-  
-  if (data.attendance === 'si' && data.companions.length > weddingMaxCompanions) {
-    showWeddingNotification(`Máximo ${weddingMaxCompanions} acompañantes`, 'error');
+
+  if (
+    data.attendance === "si" &&
+    data.companions.length > weddingMaxCompanions
+  ) {
+    showWeddingNotification(
+      `Máximo ${weddingMaxCompanions} acompañantes`,
+      "error"
+    );
     return false;
   }
-  
+
   return true;
 }
 
-// ===== FUNCIÓN showWeddingSuccessMessage - VERSIÓN FINAL Y CORREGIDA =====
 function showWeddingSuccessMessage(result) {
   const confirmationForm = document.getElementById('confirmationForm');
   const searchResult = document.getElementById('searchResult');
 
-  // Asegúrate de que los elementos del DOM existen antes de manipularlos
+  // Verifica que los elementos existen antes de manipularlos
   if (!confirmationForm || !searchResult) {
     console.error("Error: Elementos del DOM no encontrados (confirmationForm o searchResult)");
     return;
   }
 
-  // Extrae la información de la respuesta del servidor
+  // Extrae la información necesaria de la respuesta del servidor
   const confirmationNumber = result.confirmationNumber || 'No disponible';
   const whatsappUrl = result.whatsappUrl;
-
+  
   // Oculta el formulario principal
   confirmationForm.style.display = 'none';
-
-  // Genera el HTML de éxito incluyendo el número de confirmación y el botón de WhatsApp
+  
+  // Genera el HTML de éxito de forma dinámica con el número de confirmación
   const whatsappButton = whatsappUrl 
     ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` 
     : '';
@@ -507,27 +544,28 @@ function showWeddingSuccessMessage(result) {
   searchResult.className = "search-result success";
   searchResult.style.display = "block";
 
-  // Muestra una notificación de éxito
   showWeddingNotification("¡Confirmación enviada! 🎉", "success");
 }
 
 async function testWeddingBackend() {
   try {
-    console.log('🧪 Testing backend connection...');
+    console.log("🧪 Testing backend connection...");
     const response = await fetch(`${WEDDING_BACKEND_URL}/api/health`);
     if (response.ok) {
       const data = await response.json();
-      console.log('✅ Backend conectado:', data);
+      console.log("✅ Backend conectado:", data);
     }
   } catch (error) {
-    console.error('❌ Backend no disponible:', error);
+    console.error("❌ Backend no disponible:", error);
   }
 }
 
 // ===== NOTIFICACIONES =====
 function showWeddingNotification(message, type = "info") {
-  const existingNotifications = document.querySelectorAll('.wedding-notification');
-  existingNotifications.forEach(n => n.remove());
+  const existingNotifications = document.querySelectorAll(
+    ".wedding-notification"
+  );
+  existingNotifications.forEach((n) => n.remove());
 
   const notification = document.createElement("div");
   notification.className = `wedding-notification ${type}`;
@@ -547,7 +585,7 @@ function showWeddingNotification(message, type = "info") {
     animation: slideIn 0.3s ease-out;
   `;
 
-  const content = notification.querySelector('.notification-content');
+  const content = notification.querySelector(".notification-content");
   content.style.cssText = `
     display: flex;
     align-items: center;
@@ -569,26 +607,26 @@ function showWeddingNotification(message, type = "info") {
 }
 
 function getWeddingNotificationIcon(type) {
-  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  const icons = { success: "✅", error: "❌", info: "ℹ️", warning: "⚠️" };
   return icons[type] || icons.info;
 }
 
 function getWeddingNotificationColor(type) {
   const colors = {
-    success: 'linear-gradient(135deg, #378b85, #4dd0c7)',
-    error: 'linear-gradient(135deg, #d4764f, #b85a3e)',
-    info: 'linear-gradient(135deg, #7bb5a8, #5a9aa8)',
-    warning: 'linear-gradient(135deg, #ff6b47, #e55a3c)'
+    success: "linear-gradient(135deg, #378b85, #4dd0c7)",
+    error: "linear-gradient(135deg, #d4764f, #b85a3e)",
+    info: "linear-gradient(135deg, #7bb5a8, #5a9aa8)",
+    warning: "linear-gradient(135deg, #ff6b47, #e55a3c)",
   };
   return colors[type] || colors.info;
 }
 
 // ===== ESTILOS CSS =====
 (function addWeddingStyles() {
-  if (document.getElementById('wedding-form-styles-unique')) return;
-  
-  const style = document.createElement('style');
-  style.id = 'wedding-form-styles-unique';
+  if (document.getElementById("wedding-form-styles-unique")) return;
+
+  const style = document.createElement("style");
+  style.id = "wedding-form-styles-unique";
   style.textContent = `
     @keyframes slideIn {
       0% { opacity: 0; transform: translateX(100%); }
@@ -683,29 +721,29 @@ function getWeddingNotificationColor(type) {
 })();
 
 // ===== INICIALIZACIÓN =====
-document.addEventListener("DOMContentLoaded", function() {
-  console.log('📋 DOM loaded - Wedding Form Handler');
-  
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("📋 DOM loaded - Wedding Form Handler");
+
   setTimeout(() => {
     initWeddingFormHandler();
-    
+
     // Debug info
-    console.log('🔍 searchGuest:', typeof window.searchGuest);
-    console.log('➕ addCompanion:', typeof window.addCompanion);
-    console.log('➖ removeCompanionField:', typeof window.removeCompanionField);
-    
-    console.log('🎉 Wedding Form Handler Ready!');
+    console.log("🔍 searchGuest:", typeof window.searchGuest);
+    console.log("➕ addCompanion:", typeof window.addCompanion);
+    console.log("➖ removeCompanionField:", typeof window.removeCompanionField);
+
+    console.log("🎉 Wedding Form Handler Ready!");
   }, 100);
 });
 
 // ===== FUNCIÓN DE DEBUG =====
-window.debugWeddingForm = function() {
-  console.log('🐛 DEBUG INFO:');
-  console.log('- Backend URL:', WEDDING_BACKEND_URL);
-  console.log('- Current Guest:', weddingCurrentGuest);
-  console.log('- Max Companions:', weddingMaxCompanions);
-  console.log('- Search Input:', document.getElementById("searchName"));
-  console.log('- Search Button:', document.getElementById("searchButton"));
+window.debugWeddingForm = function () {
+  console.log("🐛 DEBUG INFO:");
+  console.log("- Backend URL:", WEDDING_BACKEND_URL);
+  console.log("- Current Guest:", weddingCurrentGuest);
+  console.log("- Max Companions:", weddingMaxCompanions);
+  console.log("- Search Input:", document.getElementById("searchName"));
+  console.log("- Search Button:", document.getElementById("searchButton"));
 };
 
 // ===== FUNCIONES PARA MOSTRAR NOTIFICACIONES =====
@@ -713,18 +751,18 @@ window.debugWeddingForm = function() {
 
 // Muestra una notificación temporal al usuario
 function showWeddingNotification(message, type = "info", isPersisted = false) {
-  const notificationBar = document.getElementById('wedding-notification-bar');
+  const notificationBar = document.getElementById("wedding-notification-bar");
   if (!notificationBar) {
-    console.error('❌ Contenedor de notificaciones no encontrado');
+    console.error("❌ Contenedor de notificaciones no encontrado");
     return;
   }
-  
+
   // Limpia el contenido anterior
-  notificationBar.innerHTML = '';
+  notificationBar.innerHTML = "";
   notificationBar.className = `notification-bar ${type}`;
   notificationBar.textContent = message;
-  notificationBar.style.display = 'flex';
-  
+  notificationBar.style.display = "flex";
+
   // Si no es persistente, la oculta después de 3 segundos
   if (!isPersisted) {
     setTimeout(() => {
@@ -735,18 +773,18 @@ function showWeddingNotification(message, type = "info", isPersisted = false) {
 
 // Oculta la notificación
 function hideWeddingNotification() {
-  const notificationBar = document.getElementById('wedding-notification-bar');
+  const notificationBar = document.getElementById("wedding-notification-bar");
   if (notificationBar) {
-    notificationBar.style.display = 'none';
+    notificationBar.style.display = "none";
   }
 }
 
 // Opcional: Si quieres un mensaje de carga con animación
 function showWeddingLoadingMessage(message) {
-  const notificationBar = document.getElementById('wedding-notification-bar');
+  const notificationBar = document.getElementById("wedding-notification-bar");
   if (notificationBar) {
-    notificationBar.className = 'notification-bar loading';
+    notificationBar.className = "notification-bar loading";
     notificationBar.textContent = message;
-    notificationBar.style.display = 'flex';
+    notificationBar.style.display = "flex";
   }
 }
