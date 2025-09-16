@@ -468,16 +468,26 @@ function validateWeddingFormData(data) {
   return true;
 }
 
-function showWeddingSuccessMessage(message, whatsappUrl) {
-  document.getElementById('confirmationForm').style.display = 'none'; // ✅ ESTA ES LA CORRECCIÓN
-  document.getElementById('successCard').style.display = 'block';
-  
-  // Aquí está la corrección: ahora puedes usar whatsappUrl
-  document.getElementById('whatsappButton').href = whatsappUrl;
+// ===== FUNCIÓN showWeddingSuccessMessage - VERSIÓN FINAL =====
+function showWeddingSuccessMessage(result, whatsappUrl) {
+  const searchResult = document.getElementById("searchResult");
+  const confirmationForm = document.getElementById('confirmationForm');
 
-  // Añadir un botón de WhatsApp
+  // Asegúrate de que los elementos existen antes de manipularlos
+  if (!confirmationForm || !searchResult) {
+    console.error("Error: Elementos del DOM no encontrados (confirmationForm o searchResult)");
+    return;
+  }
+
+  // Oculta el formulario y muestra el contenedor de resultados
+  confirmationForm.style.display = 'none';
+  searchResult.style.display = 'block';
+
+  // Usa las propiedades del objeto 'result'
+  const confirmationNumber = result.confirmationNumber || 'No disponible';
   const whatsappButton = whatsappUrl ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` : '';
 
+  // Genera el HTML de éxito
   searchResult.innerHTML = `
     <div class="success-message">
       <div class="success-icon">🎉</div>
@@ -490,14 +500,8 @@ function showWeddingSuccessMessage(message, whatsappUrl) {
       </button>
     </div>
   `;
+
   searchResult.className = "search-result success";
-  searchResult.style.display = "block";
-  
-  if (confirmationForm) {
-    confirmationForm.style.display = 'none';
-  }
-  
-  showWeddingNotification("¡Confirmación enviada! 🎉", "success");
 }
 
 async function testWeddingBackend() {
