@@ -5,7 +5,12 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(135deg, #4dd0c7 0%, #7bb5a8 25%, #378b85 50%, #7bb5a8 75%, #4dd0c7 100%);
+    /* Múltiples fondos: el borde encima del degradado */
+    /* background-image: url('../assets/images/boda2-removebg-preview.png'); */
+                      /* linear-gradient(135deg, #4dd0c7 0%, #7bb5a8 25%, #378b85 50%, #7bb5a8 75%, #4dd0c7 100%); */
+    background-size: contain, cover; /* 'contain' para el borde, 'cover' para el degradado */
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +43,7 @@
 
 .splash-content {
     text-align: center;
-    color: white;
+    color: #3c72b3;
     z-index: 1;
     animation: contentFadeIn 2s ease-out;
     user-select: none;
@@ -77,7 +82,7 @@
 
 @keyframes titleGlow {
     0% { text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
-    100% { text-shadow: 0 4px 16px rgba(255, 255, 255, 0.3); }
+    100% { text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); }
 }
 
 .splash-subtitle {
