@@ -13,6 +13,7 @@ const getBackendUrl = () => {
   return "https://boda-cecily-angel-backend.vercel.app";
 };
 
+
 const WEDDING_BACKEND_URL = getBackendUrl();
 // Variables globales únicas para evitar conflictos
 let weddingFormSubmitting = false;

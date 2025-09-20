@@ -8,7 +8,6 @@
     /* Múltiples fondos: el borde encima del degradado */
     /* background-image: url('../assets/images/boda2-removebg-preview.png'); */
                       /* linear-gradient(135deg, #4dd0c7 0%, #7bb5a8 25%, #378b85 50%, #7bb5a8 75%, #4dd0c7 100%); */
-    background-size: contain, cover; /* 'contain' para el borde, 'cover' para el degradado */
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     display: flex;

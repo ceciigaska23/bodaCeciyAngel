@@ -103,6 +103,7 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
     transition: all 0.5s ease;
+    /* animation: background-zoom-in 20s ease-in-out forwards infinite; */
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -1121,4 +1122,16 @@ body {
 .location-info-grid {
     display: grid;
     gap: 15px;
+}
+
+/* Animación para el fondo que crea un efecto de sutil movimiento y zoom */
+@keyframes background-zoom-in {
+    0% {
+        background-size: 150% 150%;
+        background-position: center center;
+    }
+    100% {
+        background-size: 100% 100%;
+        background-position: center center;
+    }
 }

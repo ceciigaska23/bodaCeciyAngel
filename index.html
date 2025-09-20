@@ -289,19 +289,21 @@
         });
 
         function toggleAccordion() {
-    const content = document.querySelector('.accordion-content');
-    const header = document.querySelector('.accordion-header');
+            const content = document.querySelector('.accordion-content');
+            const header = document.querySelector('.accordion-header');
 
-    if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-        content.style.display = 'none';
-        header.classList.remove('active');
-    } else {
-        content.style.display = 'grid'; // O 'block', según tu diseño
-        content.style.maxHeight = content.scrollHeight + 'px';
-        header.classList.add('active');
-    }
-}
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.style.display = 'none';
+                header.classList.remove('active');
+            } else {
+                content.style.display = 'grid'; // O 'block', según tu diseño
+                content.style.maxHeight = content.scrollHeight + 'px';
+                header.classList.add('active');
+            }
+        }
+
+
     </script>
 </body>
 
