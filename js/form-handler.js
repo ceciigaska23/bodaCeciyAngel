@@ -507,6 +507,23 @@ function validateWeddingFormData(data) {
   return true;
 }
 
+function mostrarQrModal(confirmationNumber, qrUrl, whatsappUrl) {
+  document.getElementById('confirmationNumber').textContent = confirmationNumber;
+  document.getElementById('qrImage').src = qrUrl;
+  document.getElementById('downloadQrBtn').href = qrUrl;
+  
+  // Botón de compartir QR por WhatsApp
+  const text = encodeURIComponent(`Aquí está mi código de confirmación para la boda: ${confirmationNumber}\n${qrUrl}`);
+  document.getElementById('shareWhatsappBtn').href = `https://wa.me/?text=${text}`;
+
+  document.getElementById('qrModal').classList.add('show');
+}
+
+function cerrarQrModal() {
+  document.getElementById('qrModal').classList.remove('show');
+}
+
+
 function showWeddingSuccessMessage(result) {
   const confirmationForm = document.getElementById('confirmationForm');
   const searchResult = document.getElementById('searchResult');
@@ -525,22 +542,34 @@ function showWeddingSuccessMessage(result) {
   confirmationForm.style.display = 'none';
   
   // Genera el HTML de éxito de forma dinámica con el número de confirmación
-  const whatsappButton = whatsappUrl 
-    ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` 
-    : '';
+const whatsappButton = whatsappUrl 
+  ? `<a href="${whatsappUrl}" class="btn main-btn" target="_blank">Enviar a WhatsApp</a>` 
+  : '';
 
-  searchResult.innerHTML = `
-    <div class="success-message">
-      <div class="success-icon">🎉</div>
-      <h4>¡Confirmación enviada exitosamente!</h4>
-      <p><strong>Número:</strong> ${confirmationNumber}</p>
-      <p>¡Nos vemos en la boda!</p>
-      ${whatsappButton}
-      <button onclick="location.reload()" class="btn btn-secondary" style="margin-top: 15px;">
-        Nueva Búsqueda
-      </button>
-    </div>
-  `;
+  const qrImage = result.qrUrl 
+  ? `<div class="qr-section">
+       <p>📲 Presenta este QR el día de la boda:</p>
+       <img src="${result.qrUrl}" alt="QR de confirmación" class="qr-image"/>
+     </div>`
+  : '';
+
+searchResult.innerHTML = `
+  <div class="success-message">
+    <div class="success-icon">🎉</div>
+    <h4>¡Confirmación enviada exitosamente!</h4>
+    <p><strong>Número:</strong> ${confirmationNumber}</p>
+    ${qrImage}
+    <p>¡Nos vemos en la boda!</p>
+    ${whatsappButton}
+    <button onclick="location.reload()" class="btn btn-secondary" style="margin-top: 15px;">
+      Nueva Búsqueda
+    </button>
+  </div>
+`;
+
+ if (result.qrUrl) {
+    mostrarQrModal(confirmationNumber, result.qrUrl, whatsappUrl);
+  }
 
   searchResult.className = "search-result success";
   searchResult.style.display = "block";

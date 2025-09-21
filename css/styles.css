@@ -1135,3 +1135,383 @@ body {
         background-position: center center;
     }
 }
+
+/* ===== MESA DE REGALOS STYLES ===== */
+.gifts-list-container {
+    margin-top: 25px;
+}
+
+.gift-option {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 15px;
+    background: var(--card-bg-light);
+    border: 2px solid var(--border-color-light);
+}
+
+.cash-option, .bank-transfer-section {
+    text-align: center;
+}
+
+.cash-option h5, .bank-transfer-section h5 {
+    color: #3c72b3;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.bank-details {
+    background: rgba(55, 139, 133, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.bank-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 20px;
+    margin: 15px 0;
+}
+
+.bank-info strong {
+    color: #3c72b3;
+}
+
+.copy-account-btn {
+    background: linear-gradient(45deg, #3c72b3, var(--secondary-color-light));
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.copy-account-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(60, 114, 179, 0.3);
+}
+
+/* ===== QR MODAL STYLES ===== */
+.qr-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.qr-modal.show {
+    display: flex;
+}
+
+.qr-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.qr-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.qr-modal-close:hover {
+    color: #333;
+}
+
+.qr-confirmation-details {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(55, 139, 133, 0.1);
+    border-radius: 10px;
+    border: 2px solid var(--border-color-light);
+}
+
+.qr-confirmation-details h4 {
+    color: #3c72b3;
+    margin-bottom: 10px;
+}
+
+.confirmation-number {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--tertiary-color-light);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color-light);
+}
+
+.qr-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.download-qr-btn, .share-whatsapp-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.download-qr-btn {
+    background: linear-gradient(45deg, #3c72b3, var(--secondary-color-light));
+    color: white;
+}
+
+.share-whatsapp-btn {
+    background: #25D366;
+    color: white;
+}
+
+.download-qr-btn:hover, .share-whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== CONFIRMATION STATUS STYLES ===== */
+.confirmation-status {
+    background: rgba(55, 139, 133, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid var(--border-color-light);
+    margin-top: 20px;
+}
+
+.status-confirmed {
+    border-color: #4dd0c7;
+    background: rgba(77, 208, 199, 0.1);
+}
+
+.status-confirmed .status-icon {
+    color: #378b85;
+}
+
+.status-pending {
+    border-color: #d4764f;
+    background: rgba(212, 118, 79, 0.1);
+}
+
+.status-pending .status-icon {
+    color: #d4764f;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.status-icon {
+    font-size: 1.5rem;
+}
+
+.modify-attendance-btn {
+    background: linear-gradient(45deg, var(--secondary-color-light), #5a9aa8);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.modify-attendance-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(123, 181, 168, 0.4);
+}
+
+@keyframes modalFadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive adjustments */
+/* ===== CANCEL OPTIONS STYLES ===== */
+.cancel-options {
+    text-align: center;
+    padding: 20px;
+}
+
+.cancel-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.cancel-buttons .btn {
+    min-width: 200px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.warning-message {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.warning-message a {
+    color: #3c72b3;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.warning-message a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .cancel-buttons {
+        flex-direction: column;
+    }
+    
+    .cancel-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* ===== NOTIFICATION BAR STYLES ===== */
+.notification-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    z-index: 10001;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: slideInNotification 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.notification-bar.success {
+    background: linear-gradient(135deg, #378b85, #4dd0c7);
+}
+
+.notification-bar.error {
+    background: linear-gradient(135deg, #d4764f, #b85a3e);
+}
+
+.notification-bar.info {
+    background: linear-gradient(135deg, #7bb5a8, #5a9aa8);
+}
+
+.notification-bar.loading {
+    background: linear-gradient(135deg, #7bb5a8, #5a9aa8);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes slideInNotification {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@media (max-width: 768px) {
+    .notification-bar {
+        left: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+.qr-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.qr-section img.qr-image {
+  max-width: 200px;
+  border: 5px solid #4dd0c7;
+  border-radius: 12px;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.validation-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background-color, #fdf8f0);
+  font-family: 'Poppins', sans-serif;
+}
+
+.validation-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.validation-result {
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+.validation-result .success {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.validation-result .error {
+  color: #e74c3c;
+  font-weight: bold;
+}
