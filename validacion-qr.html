@@ -20,6 +20,21 @@
   </div>
 
   <script>
+    // Configuración para Vercel - CAMBIA ESTA URL POR TU DOMINIO DE BACKEND DE VERCEL
+    const getBackendUrl = () => {
+        // Si estamos en localhost, usar el backend local (o el puerto que uses)
+        if (
+            window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1"
+        ) {
+            return "http://localhost:3000";
+        }
+        // Si no, usar la URL de producción de Vercel
+        return "https://boda-cecily-angel-backend.vercel.app";
+    };
+
+    const WEDDING_BACKEND_URL = getBackendUrl();
+
     document.addEventListener("DOMContentLoaded", async () => {
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
@@ -32,7 +47,7 @@
 
       try {
         // 🔗 Llama a tu backend, que a su vez valida con Google Apps Script
-        const response = await fetch(`/api/validate`, {
+        const response = await fetch(`${WEDDING_BACKEND_URL}/api/validate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code })
