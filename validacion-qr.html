@@ -32,28 +32,30 @@
 
       try {
         // 🔗 Llama a tu backend, que a su vez valida con Google Apps Script
-        const response = await fetch(`/api/validate-code`, {
+        const response = await fetch(`/api/validate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code })
         });
 
         const data = await response.json();
-
-        if (data.isValid) {
+        
+        // El Apps Script ahora devuelve "success" y un mensaje.
+        if (data.success) {
           resultDiv.innerHTML = `
-            <p class="success">✅ Código válido</p>
-            <p><strong>${data.message}</strong></p>
+            <p class="success">✅ Asistencia confirmada</p>
+            <p><strong>¡Bienvenido(a), ${data.guestName}!</strong></p>
+            <p class="small-text">${data.message}</p>
           `;
         } else {
           resultDiv.innerHTML = `
-            <p class="error">❌ Código inválido o ya usado</p>
+            <p class="error">❌ Código inválido o ya utilizado</p>
             <p>${data.message || 'Verifica con los novios'}</p>
           `;
         }
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = `<p class="error">⚠️ Error validando el código. Intenta de nuevo.</p>`;
+      } catch (error) {
+        console.error("Error al validar:", error);
+        resultDiv.innerHTML = `<p class="error">❌ Error al validar. Por favor, intenta de nuevo.</p>`;
       }
     });
   </script>
