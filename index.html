@@ -228,19 +228,41 @@
 
                 <div class="gifts-list-container">
                     <h4>Opciones para hacer un regalo:</h4>
-                    <ul>
-                        <li>
-                            <a href="https://www.amazon.com.mx/wedding/share/AngelyCeci" target="_blank"
-                                class="btn main-btn">
-                                Lista de Bodas en Amazon
-                            </a>
-                        </li>
-                        <li>
-                            <a href="URL_DEL_OTRO_ENLACE" target="_blank" class="btn main-btn">
-                                Otra Opción de Regalo
-                            </a>
-                        </li>
-                    </ul>
+                    
+                    <!-- Lista de Bodas -->
+                    <div class="gift-option">
+                        <a href="https://www.amazon.com.mx/wedding/share/AngelyCeci" target="_blank"
+                            class="btn main-btn">
+                            Lista de Bodas en Amazon
+                        </a>
+                    </div>
+                    
+                    <!-- Efectivo -->
+                    <div class="gift-option">
+                        <div class="cash-option">
+                            <h5>💰 Aportación en Efectivo</h5>
+                            <p>Puedes hacer tu aportación el día del evento en la mesa de regalos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Transferencia Bancaria -->
+                    <div class="gift-option">
+                        <div class="bank-transfer-section">
+                            <h5>💳 Transferencia Bancaria</h5>
+                            <div class="form-group">
+                                <label for="bankSelect">Selecciona el banco:</label>
+                                <select id="bankSelect" onchange="showBankDetails()">
+                                    <option value="">Selecciona un banco</option>
+                                    <option value="bbva">BBVA</option>
+                                    <option value="santander">Santander</option>
+                                    <option value="banamex">Banamex</option>
+                                </select>
+                            </div>
+                            <div id="bankDetails" class="bank-details" style="display: none;">
+                                <!-- Aquí se mostrarán los detalles bancarios -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -263,6 +285,25 @@
                 </div>
             </div>
         </div>
+    
+        <!-- ✅ Modal QR -->
+<div id="qrModal" class="qr-modal">
+  <div class="qr-modal-content">
+    <button class="qr-modal-close" onclick="cerrarQrModal()">×</button>
+    <h3>Tu Código de Confirmación</h3>
+    <div class="qr-confirmation-details">
+      <h4>Escanea en la entrada</h4>
+      <p class="confirmation-number" id="confirmationNumber"></p>
+    </div>
+    <img id="qrImage" src="" alt="QR de Confirmación" class="qr-image" />
+    <div class="qr-actions">
+      <a id="downloadQrBtn" class="download-qr-btn">⬇ Descargar</a>
+      <a id="shareWhatsappBtn" class="share-whatsapp-btn" target="_blank">💬 Compartir</a>
+    </div>
+  </div>
+</div>
+<!-- ✅ Fin Modal QR -->
+    
     </div>
 
     <script src="js/main.js"></script>

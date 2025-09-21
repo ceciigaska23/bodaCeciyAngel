@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validación de Asistencia - Ángel & Ceci</title>
+
+  <!-- Reutilizamos estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="validation-page">
+  <div class="validation-container">
+    <h2>🎫 Validación de Asistencia</h2>
+    <div id="validationResult" class="validation-result">
+      <p>⏳ Validando tu código...</p>
+    </div>
+    <button onclick="window.location.href='/'" class="btn main-btn" style="margin-top: 20px;">
+      Volver a la Invitación
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      const resultDiv = document.getElementById("validationResult");
+
+      if (!code) {
+        resultDiv.innerHTML = `<p class="error">❌ No se proporcionó un código de confirmación.</p>`;
+        return;
+      }
+
+      try {
+        // 🔗 Llama a tu backend, que a su vez valida con Google Apps Script
+        const response = await fetch(`/api/validate-code`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code })
+        });
+
+        const data = await response.json();
+
+        if (data.isValid) {
+          resultDiv.innerHTML = `
+            <p class="success">✅ Código válido</p>
+            <p><strong>${data.message}</strong></p>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <p class="error">❌ Código inválido o ya usado</p>
+            <p>${data.message || 'Verifica con los novios'}</p>
+          `;
+        }
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = `<p class="error">⚠️ Error validando el código. Intenta de nuevo.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
