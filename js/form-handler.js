@@ -567,9 +567,9 @@ searchResult.innerHTML = `
   </div>
 `;
 
- if (result.qrUrl) {
-    mostrarQrModal(confirmationNumber, result.qrUrl, whatsappUrl);
-  }
+//  if (result.qrUrl) {
+//     mostrarQrModal(confirmationNumber, result.qrUrl, whatsappUrl);
+//   }
 
   searchResult.className = "search-result success";
   searchResult.style.display = "block";
