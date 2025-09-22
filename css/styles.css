@@ -22,11 +22,14 @@
     --bg-color-light: var(--cream-light);
     --bg-gradient-light: linear-gradient(135deg, var(--cream-light) 0%, var(--cream) 100%);
     --card-bg-light: rgba(255, 255, 255, 0.7);
-    --text-color-light: var(--navy); /* El texto ahora será azul marino */
+    --text-color-light: var(--navy);
+    /* El texto ahora será azul marino */
     --primary-color-light: var(--terracotta);
-    --secondary-color-light: var(--sage-medium); /* Mantiene el verde para un acento sutil */
+    --secondary-color-light: var(--sage-medium);
+    /* Mantiene el verde para un acento sutil */
     --tertiary-color-light: var(--terracotta);
-    --border-color-light: var(--navy); /* El borde de las tarjetas será azul marino */
+    --border-color-light: var(--navy);
+    /* El borde de las tarjetas será azul marino */
     --shadow-color-light: rgba(0, 0, 0, 0.05);
 
     /* Paleta de colores para el tema claro */
@@ -40,39 +43,27 @@
     /* Teal oscuro */
     --color-light: #fdf8f0;
     --color-dark: #378b85;
+
+    /* Nuevas fuentes disponibles */
+    --font-handwriting: 'Edu QLD Hand', cursive;
+    /* Fuente de escritura a mano */
+    --font-playful: 'Pacifico', cursive;
+    /* Fuente divertida y redondeada */
+    --font-elegant: 'Dancing Script', cursive;
+    /* Fuente elegante para títulos */
+    --font-serif: 'Playfair Display', serif;
+    /* Fuente serif clásica */
+    --font-body: 'Inter', sans-serif;
+    /* Fuente para texto general */
+    --font-classic: 'Cormorant Garamond', serif;
+    /* Fuente clásica */
 }
 
 
 
-/* Tema Oscuro */
-/* [data-theme="dark"] {
-    --bg-color-light: #2c3e50;
-    --bg-gradient-light: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
-    --card-bg-light: rgba(44, 62, 80, 0.9);
-    --text-color-light: #ecf0f1;
-    --primary-color-light: var(--teal-light);
-    --secondary-color-light: var(--sage-medium);
-    --tertiary-color-light: var(--terracotta-light);
-    --border-color-light: rgba(77, 208, 199, 0.3);
-    --shadow-color-light: rgba(0, 0, 0, 0.4);
-    --countdown-bg-light: linear-gradient(135deg, var(--teal-light), var(--sage-medium));
-    --countdown-text-light: #fefefe;
-    --countdown-unit-bg-light: rgba(255, 255, 255, 0.1);
-    --countdown-unit-text-light: #fefefe;
-    --countdown-label-text-light: rgba(255, 255, 255, 0.7);
-    --countdown-unit-border-light: rgba(255, 255, 255, 0.2);
-
-    /* Paleta de colores para el tema oscuro */
-/* --primary-color: #1a1a1a;
-    --secondary-color: #444444;
-    --accent-color-dark: #378b85;
-    --dark-color: #fdf8f0;
-    --color-light: #fdf8f0;
-    --color-dark: #1a1a1a; 
-} */
-
 /* ===== FONT IMPORTS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap');
+
 
 /* ===== GENERAL STYLES - WEDDING INVITATION ===== */
 * {
@@ -165,9 +156,9 @@ body {
 }
 
 .wedding-announcement {
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 1.5rem;
-    color: var(--secondary-color-light);
+    color: var(--dark-color);
     font-style: italic;
     font-weight: 600;
 }
@@ -225,7 +216,7 @@ body {
 
 /* ===== LOVE STORY SECTION ===== */
 .love-story {
-    background-color: var(--card-bg-light);
+    /* background-color: var(--card-bg-light); */
     padding: 35px;
     border-radius: 20px;
     margin: 30px 0;
@@ -250,7 +241,7 @@ body {
 }
 
 .love-story h3 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     color: #3c72b3;
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -258,6 +249,7 @@ body {
 }
 
 .love-story p {
+    font-family: "Coming Soon", cursive;
     margin-bottom: 15px;
     font-size: 1.1rem;
     line-height: 1.8;
@@ -281,7 +273,7 @@ body {
     border: none;
     box-shadow: none;
     padding: 0;
-    background-color: rgba(55, 139, 133, 0.1);
+    /* background-color: rgba(55, 139, 133, 0.1); */
 }
 
 .countdown {
@@ -323,14 +315,14 @@ body {
 }
 
 .countdown-title {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     margin-bottom: 25px;
     font-size: 2rem;
     font-weight: 600;
     z-index: 1;
     position: relative;
     color: #3c72b3;
-    background-color: rgba(55, 139, 133, 0.1);
+    /* background-color: rgba(55, 139, 133, 0.1); */
 }
 
 .countdown-timer {
@@ -340,7 +332,7 @@ body {
     margin-top: 25px;
     z-index: 1;
     position: relative;
-    background-color: rgba(55, 139, 133, 0.1);
+    /* background-color: rgba(55, 139, 133, 0.1); */
 }
 
 .time-unit {
@@ -361,7 +353,7 @@ body {
 }
 
 .time-number {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 2.8rem;
     font-weight: bold;
     display: block;
@@ -382,7 +374,7 @@ body {
 }
 
 .time-label {
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 1rem;
     opacity: 0.9;
     font-weight: 500;
@@ -401,7 +393,7 @@ body {
 }
 
 .wedding-details h3 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     color: #3c72b3;
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -421,7 +413,7 @@ body {
 
 /* ===== SECTION TITLES ===== */
 .section-title {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     text-align: center;
     color: #3c72b3;
     font-size: 2.5rem;
@@ -453,7 +445,7 @@ body {
 }
 
 .venue-info {
-    background-color: var(--card-bg-light);
+    /* background-color: var(--card-bg-light); */
     padding: 25px;
     border-radius: 15px;
     margin-bottom: 30px;
@@ -465,7 +457,7 @@ body {
 } */
 
 .venue-info h3 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     color: #3c72b3;
     font-size: 1.8rem;
     margin-bottom: 15px;
@@ -481,6 +473,7 @@ body {
 }
 
 .time-info {
+    font-family: "Coming Soon", cursive;
     color: #3c72b3;
     font-size: 1.2rem;
     font-weight: 600;
@@ -492,7 +485,8 @@ body {
 }
 
 .same-venue {
-    color: var(--secondary-color-light);
+    color: var(--dark-color);
+    font-family: "Coming Soon", cursive;
     font-style: italic;
     font-weight: 500;
     margin: 15px 0 5px 0;
@@ -501,7 +495,8 @@ body {
 }
 
 .address {
-    color: var(--secondary-color-light);
+    color: var(--dark-color);
+    font-family: "Coming Soon", cursive;
     font-size: 1.1rem;
     line-height: 1.6;
     margin: 0;
@@ -609,7 +604,7 @@ body {
 }
 
 .info-card h4 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     color: #3c72b3;
     font-size: 1.2rem;
     margin-bottom: 10px;
@@ -618,6 +613,7 @@ body {
 
 .info-card p {
     color: var(--text-color-light);
+    font-family: "Coming Soon", cursive;
 }
 
 /* ===== RSVP SECTION ===== */
@@ -665,7 +661,7 @@ body {
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     transition: all 0.3s ease;
 }
 
@@ -715,7 +711,7 @@ body {
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-playful);
     margin-top: 15px;
     transition: all 0.3s ease;
 }
@@ -751,13 +747,16 @@ body {
     color: var(--text-color-light);
     line-height: 1.6;
 }
-
+.photos-drive{
+    font-family: "Coming Soon", cursive;
+}
 /* ===== FOOTER ===== */
 .footer {
     text-align: center;
     margin-top: 40px;
     padding: 20px 0;
     color: var(--secondary-color-light);
+    font-family: "Coming Soon", cursive;
 }
 
 .footer-buttons {
@@ -856,6 +855,7 @@ body {
     margin-bottom: 10px;
     font-size: 1.5rem;
     font-weight: 600;
+    font-family: "Coming Soon", cursive;
 }
 
 .form-group {
@@ -868,6 +868,7 @@ body {
     margin-bottom: 8px;
     font-weight: 500;
     color: var(--secondary-color-light);
+    font-family: "Coming Soon", cursive;
 }
 
 .form-group input,
@@ -882,6 +883,7 @@ body {
     color: var(--text-color-light);
     background: var(--card-bg-light);
     transition: all 0.3s ease;
+    font-family: "Coming Soon", cursive;
 }
 
 .form-group input:focus,
@@ -890,6 +892,7 @@ body {
     outline: none;
     border-color: #3c72b3;
     box-shadow: 0 0 8px var(--border-color-light);
+    font-family: "Coming Soon", cursive;
 }
 
 .btn {
@@ -937,8 +940,9 @@ body {
 .main-btn {
     color: var(--color-light);
     /* Color de texto claro */
-    background-color: var(--accent-color);
+    background-color: var(--terracotta);
     /* Color de acento de la paleta */
+    font-family: "Coming Soon", cursive;
 }
 
 /* Efecto al pasar el cursor */
@@ -1002,6 +1006,7 @@ body {
 
 .secondary-btn {
     color: var(--accent-color);
+    font-family: "Coming Soon", cursive;
     /* Color de acento en el texto */
     background-color: transparent;
     border-color: var(--accent-color);
@@ -1079,6 +1084,7 @@ body {
 }
 
 .accordion-header {
+    font-family: "Coming Soon", cursive;
     cursor: pointer;
     background-color: #f7f7f7;
     padding: 15px;
@@ -1107,7 +1113,8 @@ body {
 
 .accordion-content.open {
     display: grid;
-    max-height: 1000px; /* Asegúrate de que este valor sea lo suficientemente grande para todo el contenido */
+    max-height: 1000px;
+    /* Asegúrate de que este valor sea lo suficientemente grande para todo el contenido */
     transition: max-height 0.5s ease-in;
 }
 
@@ -1130,6 +1137,7 @@ body {
         background-size: 150% 150%;
         background-position: center center;
     }
+
     100% {
         background-size: 100% 100%;
         background-position: center center;
@@ -1141,6 +1149,12 @@ body {
     margin-top: 25px;
 }
 
+.gifts-section {
+            text-align: center;
+            font-family: "Coming Soon", cursive;
+        }
+
+
 .gift-option {
     margin: 20px 0;
     padding: 20px;
@@ -1149,11 +1163,13 @@ body {
     border: 2px solid var(--border-color-light);
 }
 
-.cash-option, .bank-transfer-section {
+.cash-option,
+.bank-transfer-section {
     text-align: center;
 }
 
-.cash-option h5, .bank-transfer-section h5 {
+.cash-option h5,
+.bank-transfer-section h5 {
     color: #3c72b3;
     margin-bottom: 10px;
     font-size: 1.3rem;
@@ -1271,7 +1287,8 @@ body {
     flex-wrap: wrap;
 }
 
-.download-qr-btn, .share-whatsapp-btn {
+.download-qr-btn,
+.share-whatsapp-btn {
     padding: 12px 20px;
     border: none;
     border-radius: 25px;
@@ -1294,7 +1311,8 @@ body {
     color: white;
 }
 
-.download-qr-btn:hover, .share-whatsapp-btn:hover {
+.download-qr-btn:hover,
+.share-whatsapp-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -1354,8 +1372,15 @@ body {
 }
 
 @keyframes modalFadeIn {
-    0% { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Responsive adjustments */
@@ -1407,7 +1432,7 @@ body {
     .cancel-buttons {
         flex-direction: column;
     }
-    
+
     .cancel-buttons .btn {
         width: 100%;
     }
@@ -1427,7 +1452,7 @@ body {
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     animation: slideInNotification 0.3s ease-out;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -1451,13 +1476,27 @@ body {
 }
 
 @keyframes slideInNotification {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1469,49 +1508,233 @@ body {
 }
 
 .qr-section {
-  margin: 20px 0;
-  text-align: center;
+    margin: 20px 0;
+    text-align: center;
 }
 
 .qr-section img.qr-image {
-  max-width: 200px;
-  border: 5px solid #4dd0c7;
-  border-radius: 12px;
-  background: white;
-  padding: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 200px;
+    border: 5px solid #4dd0c7;
+    border-radius: 12px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .validation-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: var(--background-color, #fdf8f0);
-  font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--background-color, #fdf8f0);
+    font-family: 'Poppins', sans-serif;
 }
 
 .validation-container {
-  background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .validation-result {
-  margin-top: 20px;
-  font-size: 1.2em;
+    margin-top: 20px;
+    font-size: 1.2em;
 }
 
 .validation-result .success {
-  color: #2ecc71;
-  font-weight: bold;
+    color: #2ecc71;
+    font-weight: bold;
 }
 
 .validation-result .error {
-  color: #e74c3c;
-  font-weight: bold;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* ===== DRESS CODE SECTION ===== */
+.dress-code {
+    background: linear-gradient(135deg, var(--gold-light) 0%, rgba(244, 228, 166, 0.3) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    margin: 30px 0;
+    /* border: 2px solid var(--gold); */
+    text-align: center;
+    position: relative;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-family: "Coming Soon", cursive;
+}
+
+.dress-code::before {
+    content: '👔';
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    font-size: 2rem;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.dress-code::after {
+    content: '👗';
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-size: 2rem;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.dress-code h3 {
+    font-family: "Coming Soon", cursive;
+    color: var(--dark-color);
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.dress-code-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    font-family: "Coming Soon", cursive;
+}
+
+.dress-option {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid var(--gold);
+    transition: all 0.3s ease;
+}
+
+.dress-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+}
+
+.dress-option h4 {
+    font-family: "Coming Soon", cursive;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.dress-option p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.dress-colors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 2px;
+}
+
+element.style {
+    margin: 0;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+/* ===== GARDEN TIPS SECTION ===== */
+.garden-tips {
+    background: var(--gold-light);
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 2px solid var(--gold);
+    text-align: center;
+}
+
+.garden-tips h4 {
+    color: var(--color-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-family: "Coming Soon", cursive;
+    font-weight: 600;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    text-align: left;
+}
+
+.tips-grid div p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-primary);
+    font-family: "Coming Soon", cursive;
+}
+
+.tips-grid strong {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+/* ===== DRESS CODE FINAL MESSAGE ===== */
+.dress-code-final-message {
+    margin-top: 25px;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    font-family: var(--font-handwriting);
+    font-weight: 500;
+}
+
+.dress-code-final-message strong {
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.venue-highlight {
+    background: rgba(77, 208, 199, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border-left: 4px solid var(--teal-light);
+    transition: all 0.3s ease;
+}
+
+.venue-highlight p {
+    margin: 0;
+    font-weight: 500;
+    color: var(--color-dark);
+    font-family: "Coming Soon", cursive;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.venue-highlight strong {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+.venue-highlight:hover {
+    background: rgba(77, 208, 199, 0.15);
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(77, 208, 199, 0.2);
 }

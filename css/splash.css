@@ -85,7 +85,7 @@
 }
 
 .splash-subtitle {
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 1.5rem;
     margin-bottom: 2rem;
     opacity: 0.9;
@@ -109,7 +109,7 @@
     padding: 18px 40px;
     border-radius: 50px;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
@@ -144,7 +144,7 @@
 }
 
 .splash-hint {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Coming Soon", cursive;
     font-size: 0.9rem;
     opacity: 0.8;
     font-style: italic;
