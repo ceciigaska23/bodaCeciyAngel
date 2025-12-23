@@ -64,27 +64,45 @@ window.searchGuest = async function () {
 // ===== NUEVA FUNCIÓN: VERIFICAR CONFIRMACIÓN PREVIA =====
 async function checkPreviousConfirmation(guestData) {
   try {
+    console.log("🔍 Verificando si el invitado ya confirmó...");
+    console.log("📋 Guest Data:", guestData);
+    
     showWeddingNotification("Verificando estado...", "info", true);
     
-    const response = await fetch(
-      `${WEDDING_BACKEND_URL}/api/check-confirmation?guestId=${encodeURIComponent(guestData.id)}`
-    );
+    const checkUrl = `${WEDDING_BACKEND_URL}/api/check-confirmation?guestId=${encodeURIComponent(guestData.id)}`;
+    console.log("📡 URL de verificación:", checkUrl);
+    
+    const response = await fetch(checkUrl);
+    
+    if (!response.ok) {
+      console.warn(`⚠️ Response status: ${response.status}`);
+    }
+    
     const result = await response.json();
     
-    console.log("📄 Verificación de confirmación:", result);
+    console.log("📄 Resultado de verificación:", result);
+    console.log("  - hasConfirmed:", result.hasConfirmed);
+    console.log("  - confirmationNumber:", result.confirmationNumber);
+    console.log("  - message:", result.message);
     
     hideWeddingNotification();
     
-    if (result.hasConfirmed) {
-      // Ya confirmó - mostrar mensaje especial
+    if (result.hasConfirmed === true) {
+      console.log("✅ El invitado YA confirmó previamente");
       showAlreadyConfirmedMessage(guestData, result);
     } else {
-      // No ha confirmado - mostrar formulario normal
+      console.log("ℹ️ El invitado NO ha confirmado aún");
       handleWeddingGuestFound(guestData);
     }
   } catch (error) {
     console.error("❌ Error verificando confirmación:", error);
-    // En caso de error, permitir continuar
+    console.error("  - Message:", error.message);
+    console.error("  - Stack:", error.stack);
+    
+    hideWeddingNotification();
+    
+    // En caso de error, permitir continuar con el formulario
+    console.warn("⚠️ Error en verificación - permitiendo continuar");
     handleWeddingGuestFound(guestData);
   }
 }

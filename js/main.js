@@ -819,6 +819,10 @@ function addFadeInUpAnimation() {
 
 // ===== UTILITY FUNCTIONS =====
 function showNotification(message, type = "success") {
+  // Remover notificaciones existentes
+  const existingNotifications = document.querySelectorAll('.notification');
+  existingNotifications.forEach(n => n.remove());
+  
   const notification = document.createElement("div");
   notification.className = `notification ${type}`;
   notification.innerHTML = `
@@ -866,7 +870,15 @@ function showNotification(message, type = "success") {
 
 function handleError(error, userMessage = "Ha ocurrido un error inesperado") {
   console.error("Error:", error);
-  showNotification(userMessage, "error");
+  
+  // Usar la función global
+  if (typeof window.showNotification === 'function') {
+    window.showNotification(userMessage, "error");
+  } else {
+    // Fallback si showNotification no está disponible
+    console.error("showNotification no disponible:", userMessage);
+    alert(userMessage);
+  }
 }
 
 // Funciones para la sección de ubicación
