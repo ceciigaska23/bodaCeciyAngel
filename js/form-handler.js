@@ -799,7 +799,7 @@ function getWeddingNotificationColor(type) {
   return colors[type] || colors.info;
 }
 
-/ ===== ESTILOS CSS =====
+// ===== ESTILOS CSS =====
 (function addWeddingStyles() {
   if (document.getElementById("wedding-form-styles-unique")) return;
 
